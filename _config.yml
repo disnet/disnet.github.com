@@ -1,0 +1,2 @@
+destination: /Library/WebServer/Documents
+permalink: /blog/:year/:month/:day/:title

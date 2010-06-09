@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title>disnetdev</title>
+  <link rel="stylesheet" href="/style.css" type="text/css" />
+  <link rel="icon" type="image/jpeg" href="favicon.ico" />
+  <link rel="alternate" type="application/atom+xml" title="Tim Disney - Atom" href="http://feeds.feedburner.com/Disnetdevcom" />
+</head>
+
+<body>
+  <div class="main">
+      <h1>Tim Disney</h1>
+
+      <div class="nav">
+          <div class="navitem"><a href="/index.html">about</a></div>
+          <div class="navitem"><a href="/code.html">code</a></div>
+          <div class="navitem"><a href="/papers.html">papers</a></div>
+          <div class="navitem"><a href="/blog">blog</a></div>
+          <div style="clear:both"></div>
+      </div>
+
+      <div class="content">
+        {{content}} 
+      </div>
+
+      <div class="footer" style="clear: both">
+        <small>Copyright &copy; Tim Disney</small>
+      </div>
+  </div>
+
+<!--
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{ 
+var pageTracker = _gat._getTracker("UA-744645-1");
+pageTracker._trackPageview();
+} catch(err) {} 
+</script>
+-->
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/disnetdev/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+</body>
+
+</html>
