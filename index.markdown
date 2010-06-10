@@ -17,7 +17,7 @@ The most updated stuff will be on my [blog](blog/) however.
 On the tubes
 ------------
 
-You can also find me in various other places around the 
+I also exist in various other places around the 
 [tubes](http://www.youtube.com/watch?v=f99PcP0aFNE). You can 
 find me on 
 [Facebook](http://www.facebook.com/disnet), 
