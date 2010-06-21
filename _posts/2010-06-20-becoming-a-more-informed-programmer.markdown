@@ -1,5 +1,6 @@
 ---
 title: Becoming a More Informed Programmer
+layout: post
 ---
 
 So I wrote a little [interactive fiction](http://en.wikipedia.org/wiki/Interactive_fiction) game for class a few months ago and am putting it up here for those who wish to inflict my shoddy game design abilities upon themselves :)
