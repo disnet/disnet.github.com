@@ -17,4 +17,4 @@ I'm not going to bother explaining it since you can probably figure out what it 
 
 Anyhow the game I created was a Monty Python themed adventure game. Be warned, it's almost impossible to complete if you haven't watched the movie :)
 
-Grab the [code](code/grail_search.inform) or get the [zblorb](code/grail_search.zblorb) to run in your [favorite](http://ccxvii.net/spatterlight/) [z-machine](http://www.inform-fiction.org/zmachine/windows.html) [interpreters](http://www.inform-fiction.org/zmachine/unix.html).
+Grab the [code](/code/grail_search.inform) or get the [zblorb](/code/grail_search.zblorb) to run in your [favorite](http://ccxvii.net/spatterlight/) [z-machine](http://www.inform-fiction.org/zmachine/windows.html) [interpreters](http://www.inform-fiction.org/zmachine/unix.html).
