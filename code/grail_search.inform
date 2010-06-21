@@ -1,0 +1,206 @@
+"Grail Search" by Tim Disney
+
+The block giving rule is not listed in the check giving it to rules.
+
+Use no scoring.
+
+Talking is an action applying to one visible thing.
+
+A person can be introduced. A person is usually not introduced.
+
+Understand "talk to [someone]" as talking.
+
+Report talking: say "[the noun] has nothing to say."
+
+The Crossroads of the Kingdom is a room. "You are standing at the Crossroads of the Kingdom. From here you could reach anywhere in this proud and mighty land!
+
+To the west you see a pathway leading to the pond. Pathways to the east and north lead deep into the forest."
+
+Camelot is a thing in crossroads of the kingdom. The description is "It's only a model."
+
+King Arthur is a man in crossroads. The description is "He is Arthur, son of Uther Pendragon, from the castle of Camelot.  King of the Britons, defeater of the Saxons, sovereign of all England!"
+
+Instead of talking arthur when in crossroads:
+	if arthur is not introduced:
+		now arthur is introduced;
+		say "'Hello one of my brave and noble Knights of the Round Table!' says King Arthur.
+
+'Which one were you? Oh, never mind it doesn't really matter. All that matters is the Grail!'
+
+'Yes I've been given a quest from God to seek it out. Join me in this divine and most holy task!'";
+	otherwise:
+		say "'Shall we start exploring?' he says";
+
+Every turn:
+	if the location of Arthur is not the location of the player:
+		move Arthur to the location of the player.
+
+The Pond Shore is west of crossroads. "The pond stretches out to the north."
+
+The Rickety Boat is a vehicle in The Pond Shore. "A rickety boat is tied on the shore." The description is "Hum...look rickety."
+
+Instead of going north from the Pond Shore when the player is not in a vehicle, say "You're not that good a swimmer."
+
+Instead of exiting when the player is in a vehicle and the location is not The Pond Shore, say "You're not that good a swimmer."
+
+The Foggy Pond is north of the Pond Shore. "You are wrapped in an ethereal fog as you row deeper into the pond."
+
+Excalibur is a thing in the Foggy Pond. "A woman, her arm clad in the purest shimmering samite, holds aloft Excalibur from the bosom of the water signifying by Divine Providence that Arthur, was to carry Excalibur.
+
+But I'm sure he won't mind if you borrow it for a while." The description is "Excalibur! The legendary sword of Arthur. I'm sure he won't mind if you use it for a little while."
+
+The Dark Forest is east of crossroads. "This stretch is guarded by a fearsome Knight.
+
+A pathway runs from east to west."
+
+The Black Knight is a man in the Dark Forest. The Black Knight has a number called current body pieces. The current body pieces of the Black Knight is 4.
+
+Instead of going east in the Dark Forest:
+	if the current body pieces of the Black Knight is greater than 0, say "'None shall pass!' says the Black Knight.";
+	otherwise continue the action
+
+Instead of attacking the Black Knight:
+	if the player carries Excalibur and the current body pieces of the noun is greater than 0:
+		say "You swing [Excalibur] viciously at [the noun] deftly slicing off his [one of]left arm[or]right arm[or]left leg[or]right leg[at random].
+		
+		The Knight exclaims [one of]'Tis but a scratch!'[or]'I've had worse'[or]'Just a flesh wound'[or]'I'll bite your legs off!'[at random]";
+		decrease current body pieces of the black knight by 1;
+		if the current body pieces of the noun is 0, say "[paragraph break]'We'll call it a draw then' says the Black Knight.
+		
+		
+		Now that he's down to stumps I think you're safe.";
+	otherwise if the current body pieces of the noun is 0:
+		say "He can't hurt anyone in his condition. No point in killing him."
+
+The French Castle is east of Dark Forest. 
+
+The bush is a thing in the French Castle.
+
+The Trojan Bunny is a vehicle. The description is "Um...fair enough. This is a giant wooden rabbit."
+
+Instead of examining the bush:
+	say "Wow, on first examination the bush didn't seem all the exciting but now you noticed what can only be described as a deus ex ma-er I mean Trojan Bunny. Should be useful for all manner of things.";
+	now the trojan bunny is in the french castle;
+	
+The Book of Armaments is a thing. The description is "This book describes in at times tedious and needless detail all the weapons (both Holy and Cursed) that a virtuous Knight Errant may come across during his erranting.".
+
+The Holy Hand Grenade of Antioch is a thing. The description is "This sacred orb is ornately decorated with shining jewels and a cruciform pull-pin.".
+
+After entering trojan bunny:
+	say "The foolish french are fooled! Thinking the giant wooden rodent is a gift they bring it into the castle. When night falls you and Arthur spring out notice a few useful items and leave.";
+	now the player carries hand grenade;
+	now the player carries book of armaments;
+	remove the bunny from play;
+	now the player is in french castle;
+
+The French Guard is a man in the French Castle.
+
+Instead of asking guard about something:
+	say "'Go and boil your bottoms, sons of a silly person.  I blow my nose at you, so-called Arthur-king, you and all your silly English kaniggets.  Thppppt!
+
+'I don't want to talk to you no more, you empty headed animal food trough whopper!  I fart in your general direction!  You mother was a hamster and your father smelt of elderberries.'"
+
+Instead of talking arthur when in the French Castle, say "'There must be some way into that castle! We should look around. I'm sure there's something here that might be helpful'"
+
+The Forest of the Knights who say Nee is north of crossroads.
+
+The Head Knight is a man in the Forest of the Knights who say Nee.
+
+Instead of going north in the Forest of the Knights who say Nee:
+	if the head knight carries shrub, continue the action;
+	otherwise say "The knight blocks your path";
+
+
+Instead of giving shrub to Head Knight:
+	say "'Why Thanks!";
+	now the head knight carries shrub;
+
+
+The Shrubbery Town is east of the Forest of the Knights who say Nee.
+
+The Old Crone is a woman in the Shrubbery Town. The Old Crone has a number called nee resistance. The nee resistance of the old crone is 3.
+
+Roger the Shrubber is a man.
+
+Instead of asking old crone about something:
+	if the topic understood includes "shrubbery", say "Who sent you?";
+	otherwise continue the action;
+[say?]
+Instead of telling old crone about something:
+	if the topic understood includes "nee":
+		say "[one of]Agh! No! Never! We have no shrubberies here.[or]Agh! Do your worst![or]No! Never! No Shrubberies[in random order]";
+		decrease nee resistance of the old crone by 1;
+		if the nee resistance of the old crone is 0:
+			say "[paragraph break](a commoner comes on the scene)[paragraph break]'Oh, what sad times are these when passing ruffians can say 'nee' at will to old ladies.  There is a pestilence upon this land, nothing is sacred.  Even those who arrange and design shrubberies are under considerable economic stress at this period in history.'";
+			now roger is in Shrubbery Town;
+	otherwise:
+		continue the action;
+		
+The Shrub is a thing. "What a fine looking Shrubbery!"
+
+Instead of asking Roger about something:
+	if the topic understood includes "shrubbery":
+		say "'Yes, shrubberies are my trade -- I am a shrubber.  My name is Roger the Shrubber.  I arrange, design, and sell shrubberies. Would you like one?'"
+		
+After answering Roger that "yes":
+	say "Here you go!";
+	now the player carries Shrub;
+
+Tim's Hut is north of The Forest of the Knights who say Nee.
+
+Tim is a man in Tim's Hut.
+
+Instead of asking Tim about "grail":
+	say "To the north there lies a cave -- the cave of Caerbannog -- wherein, carved in mystic runes upon the very living rock, the last words of Ulfin Bedweer of Regett proclaim the last resting place of the most Holy Grail.[paragraph break]Follow!  But! follow only if ye be men of valor, for the entrance to this cave is guarded by a creature so foul, so cruel that no man yet has fought with it and lived!  Bones of four fifty men lie strewn about its lair. So, brave knights, if you do doubt your courage or your strength, come no further, for death awaits you all with nasty big pointy teeth.";
+	now the player is in the Cave of Caerbannog;
+
+The Cave of Caerbannog is a room.
+
+The Vorpal Rabbit is an animal in the cave. "[The Vorpal Rabbit] sits perched atop a grinning skull.". The description is "Though at first glance this creature is disarmingly cute, the gore dribbling down its front belies the true nature of this most foul, cruel, and bad tempered rodent.".
+
+Instead of going east in the cave:
+	if the Vorpal Rabbit is in the cave, say "The bad tempered rodent blocks your path!";
+	otherwise continue the action;
+
+Understand "read [book]" as reading of. Reading of is an action applying to one visible thing.
+
+After reading of book of armaments:
+	say "You intone from Chapter 2, verses 9-21: 'And the Lord spake, saying, 'First shalt thou take out the Holy Pin, then shalt thou count to three, no more, no less. Three shall be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, neither count thou two, excepting that thou then proceedest on to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who being naughty in my sight, shall snuff it.' Amen.'
+	
+	
+	At this Arthur readies [The Holy Hand Grenade of Antioch] and shouts 'One, Two, Five!'
+	
+	'Three sire!' you correct.
+	
+	'Three!' cries Arthur as he hurls [The Holy Hand Grenade of Antioch] at the [Vorpal Rabbit] blasting it to smithereens.";
+	remove vorpal rabbit from play;
+
+The Bridge of Death is east of The Cave of Caerbannog.
+
+The Man from Scene 24 is a man in the bridge of death. The man has some text called passq.
+
+Instead of going east in the bridge of death:
+	if the man from scene 24 is in the bridge of death:
+		if the passq of the man from scene 24 is "":
+			say "Stop!  What is your name?";
+			now the passq of the man from scene 24 is "name";
+	otherwise:
+		continue the action;
+	
+
+After answering the man from scene 24 that something:
+	if passq of the man from scene 24 is "name":
+		say "What is your quest?";
+		now the passq of the man from scene 24 is "quest";
+	otherwise if passq of the man from scene 24 is "quest" and the topic understood includes "grail":
+		say "What is the air-speed velocity of an unladen swallow?";
+		now the passq of the man from scene 24 is "swallow";
+	otherwise if passq of the man from scene 24 is "swallow" and the topic understood includes "african or european":
+		say "What?  I don't know that!  Auuuuuuuugh!";
+		remove man from scene 24 from play;
+		
+The Castle of Uugggghhhh is east of the Bridge of Death.
+
+The Holy Grail is a thing in the castle of Uugggghhhh.
+
+After taking grail, end the game saying "You win!"
