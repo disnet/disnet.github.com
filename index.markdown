@@ -22,10 +22,10 @@ On the tubes
 I also exist in various other places around the 
 [tubes](http://www.youtube.com/watch?v=f99PcP0aFNE). You can 
 find me on 
-[Facebook](http://www.facebook.com/disnet), 
-[Twitter](http://twitter.com/disnet),
-[YouTube](http://www.youtube.com/user/rubberduckey2007),
-[LinkedIn](http://www.linkedin.com/in/timdisney),
-[Delicious](http://delicious.com/rubberduckey/), 
-[GitHub](http://github.com/disnet), and
-[Flickr](http://www.flickr.com/photos/timdisney/).
+<a href="http://www.facebook.com/disnet" rel="me">Facebook</a>, 
+<a href="http://twitter.com/disnet" rel="me">Twitter</a>,
+<a href="http://www.youtube.com/user/rubberduckey2007" rel="me">YouTube</a>,
+<a href="http://www.linkedin.com/in/timdisney" rel="me">LinkedIn</a>,
+<a href="http://delicious.com/rubberduckey" rel="me">Delicious]</a>, 
+<a href="http://github.com/disnet" rel="me">GitHub</a>, and
+<a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
