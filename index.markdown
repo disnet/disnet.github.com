@@ -1,5 +1,7 @@
 ---
 layout: default
+subtitle: Home
+metacontent: Links to my various writtings, code, papers, blog, etc.
 ---
 
 About me
