@@ -26,6 +26,6 @@ find me on
 <a href="http://twitter.com/disnet" rel="me">Twitter</a>,
 <a href="http://www.youtube.com/user/rubberduckey2007" rel="me">YouTube</a>,
 <a href="http://www.linkedin.com/in/timdisney" rel="me">LinkedIn</a>,
-<a href="http://delicious.com/rubberduckey" rel="me">Delicious]</a>, 
+<a href="http://delicious.com/rubberduckey" rel="me">Delicious</a>, 
 <a href="http://github.com/disnet" rel="me">GitHub</a>, and
 <a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
