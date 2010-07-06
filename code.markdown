@@ -4,6 +4,15 @@ metacontent: Various pices of code written by Tim Disney
 subtitle: Code
 ---
 
+Grail Search
+------------
+
+A little interactive fiction game I wrote for class. See the [post](blog/2010/06/20/becoming-a-more-informed-programmer/) I wrote for more details.
+
+* [Inform7 code](/code/grail_search.inform)
+* [zblorb binary](/code/grail_search.zblorb)
+
+
 [Webvo](http://code.google.com/p/webvo/)
 -----
 
