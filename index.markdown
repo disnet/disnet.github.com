@@ -1,7 +1,7 @@
 ---
 layout: default
 subtitle: Home
-metacontent: Links to my various writtings, code, papers, blog, etc.
+metacontent: Grad student at UCSC researching programming languages. 
 ---
 
 About me
