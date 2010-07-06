@@ -14,7 +14,7 @@ so I work on various PL things at the [slang](http://slang.soe.ucsc.edu/Site/Hom
 
 From time to time I've been known to write things. Sometimes I 
 write [code](code.html), sometimes [papers](papers.html). 
-The most updated stuff will be on my [blog](blog/).
+The most up to date stuff will probably be on my [blog](blog/).
 
 On the tubes
 ------------
