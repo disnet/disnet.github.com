@@ -2,7 +2,36 @@
 layout: default
 metacontent: Various pices of code written by Tim Disney
 subtitle: Code
+stylesheets:
+- /code/vis.css
+scripts:
+- /code/jit.js
+- /code/jquery-1.4.2.js
+- /code/jquery-ui-1.8.1.custom.min.js
+- /code/jsvis.js
 ---
+
+JSVis
+-----
+
+<script type="text/javascript">
+var VIS = undefined;
+$(document).ready(function() {
+  $("#btnHere").click(function() {
+    if(VIS === undefined) {
+      VIS = new JSVis();
+      VIS.init();
+    }
+    else {
+      $("#infovis").css("display", "block");
+    }
+  }); 
+});
+</script>
+
+Slick little visualization thingy I wrote for a visualization class in Spring of 2010.
+
+To try it out click <a id="btnHere" href="#">here</a>
 
 Grail Search
 ------------
