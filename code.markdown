@@ -1,6 +1,6 @@
 ---
 layout: default
-metacontent: Various pices of code written by Tim Disney
+metacontent: Various pieces of code written by Tim Disney
 subtitle: Code
 stylesheets:
 - /code/vis.css
@@ -29,9 +29,20 @@ $(document).ready(function() {
 });
 </script>
 
-Slick little visualization thingy I wrote for a visualization class in Spring of 2010.
+JSVis is an object visualization for JavaScript code. It runs through all the objects it can 
+find in the global namespace and shows their relationships in a node-link vis.
 
-To try it out click <a id="btnHere" href="#">here</a>
+It uses the awesome [JavaScript InfoVis Toolkit](http://thejit.org/) to do the heavy visualization
+lifting. 
+
+To try it out click <a id="btnHere" href="#">here</a>.
+
+JSVis was originally a class project and you can check out the project 
+[website](http://www.soe.ucsc.edu/classes/cmps261/Spring10/projects/projects/tdisney/proj/index.html) 
+for some of the rational. 
+
+The latest and greatest code (and maybe documentation) can be found on 
+[github](http://github.com/disnet/jsvis).
 
 Grail Search
 ------------
