@@ -39,7 +39,7 @@ To try it out click <a id="btnHere" href="#">here</a>.
 
 This was originally a class project and you can check out the project 
 [website](http://www.soe.ucsc.edu/classes/cmps261/Spring10/projects/projects/tdisney/proj/index.html) 
-for some of the rational. 
+for some of the rational behind it. 
 
 The latest and greatest code (and maybe documentation) can be found on 
 [github](http://github.com/disnet/jsvis).
