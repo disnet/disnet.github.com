@@ -37,7 +37,7 @@ lifting.
 
 To try it out click <a id="btnHere" href="#">here</a>.
 
-JSVis was originally a class project and you can check out the project 
+This was originally a class project and you can check out the project 
 [website](http://www.soe.ucsc.edu/classes/cmps261/Spring10/projects/projects/tdisney/proj/index.html) 
 for some of the rational. 
 
