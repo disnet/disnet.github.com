@@ -29,3 +29,5 @@ find me on
 <a href="http://delicious.com/rubberduckey" rel="me">Delicious</a>, 
 <a href="http://github.com/disnet" rel="me">GitHub</a>, and
 <a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
+
+I am also reachable via email: tim DOT disney AT gmail DOT com
