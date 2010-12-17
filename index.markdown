@@ -4,7 +4,7 @@ subtitle: Home
 metacontent: Grad student at UCSC researching programming languages. 
 ---
 
-About me
+Me
 --------
 
 <img style="float:right; margin-left: 25px; border: 1px solid black" width="146" height="200" alt="me" src="images/morgan.jpg"/>
@@ -15,6 +15,8 @@ so I work on various PL things at the [slang](http://slang.soe.ucsc.edu/Site/Hom
 From time to time I've been known to write things. Sometimes I 
 write [code](code.html), sometimes [papers](papers.html). 
 The most up to date stuff will probably be on my [blog](blog/).
+
+You can also see my <a href="cv.pdf">CV</a>.
 
 On the tubes
 ------------

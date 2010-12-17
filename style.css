@@ -25,6 +25,12 @@ a:hover {
     text-decoration: none;
 }
 
+a.normal:hover {
+    background: transparent none repeat scroll 0 0;
+    color: #000000;
+    text-decoration: none;
+}
+
 
 .main {
     margin: 0 auto;
