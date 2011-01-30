@@ -4,24 +4,13 @@ subtitle: Home
 metacontent: Grad student at UCSC researching programming languages. 
 ---
 
-Me
---------
-
 <img style="float:right; margin-left: 25px; border: 1px solid black" width="146" height="200" alt="me" src="images/morgan.jpg"/>
 
-I'm a grad student at UCSC. Programming languages are my primary interest
-so I work on various PL things at the [slang](http://slang.soe.ucsc.edu/Site/Home.html) lab.
+I'm a grad student at UCSC. Programming languages are my primary research interest
+so I work on various PL things at the [slang](http://slang.soe.ucsc.edu/Site/Home.html) lab
+with my advisor [Cormac Flanagan](http://slang.soe.ucsc.edu/cormac/).
 
-From time to time I've been known to write things. Sometimes I 
-write [code](code.html), sometimes [papers](papers.html). 
-The most up to date stuff will probably be on my [blog](blog/).
-
-You can also see my <a href="cv.pdf">CV</a>.
-
-On the tubes
-------------
-
-I also exist in various other places around the 
+I exist in various other places around the 
 [tubes](http://www.youtube.com/watch?v=f99PcP0aFNE). You can 
 find me on 
 <a href="http://www.facebook.com/disnet" rel="me">Facebook</a>, 
@@ -33,3 +22,10 @@ find me on
 <a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
 
 I am also reachable via email: tim.disney@<span style="display:none">null</span>gmail.com
+
+My <a href="cv.pdf">CV</a>.
+
+Recent Publications
+-------------------
+
+[\[pdf\]](/papers/disney_stop11.pdf) Gradual Information Flow Typing \(STOP 2011\)
