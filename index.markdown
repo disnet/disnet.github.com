@@ -13,13 +13,13 @@ with my advisor [Cormac Flanagan](http://slang.soe.ucsc.edu/cormac/).
 I exist in various other places around the 
 [tubes](http://www.youtube.com/watch?v=f99PcP0aFNE). You can 
 find me on 
-<a href="http://www.facebook.com/disnet" rel="me">Facebook</a>, 
 <a href="http://twitter.com/disnet" rel="me">Twitter</a>,
+<a href="http://github.com/disnet" rel="me">GitHub</a>, 
+<a href="http://www.facebook.com/disnet" rel="me">Facebook</a>, 
 <a href="http://www.youtube.com/user/rubberduckey2007" rel="me">YouTube</a>,
 <a href="http://www.linkedin.com/in/timdisney" rel="me">LinkedIn</a>,
-<a href="http://delicious.com/rubberduckey" rel="me">Delicious</a>, 
-<a href="http://github.com/disnet" rel="me">GitHub</a>, and
-<a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
+<a href="https://pinboard.in/u:disnet/public/" rel="me">Pinboard</a>, 
+and <a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
 
 I am also reachable via email: tim.disney@<span style="display:none">null</span>gmail.com
 

@@ -1,15 +1,23 @@
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    /* font-family: 'Maven Pro', serif; /* Helvetica, Arial, sans-serif;*/
+    font-family: 'Molengo', serif; 
     font-size: large;
 }
 
+
 h1 {
-    font-family: georgia,'bitstream vera sans serif','lucida grande',helvetica,verdana,sans-serif
+    /* font-family: georgia,'bitstream vera sans serif','lucida grande',helvetica,verdana,sans-serif*/
+    font-family: 'Molengo', serif;
 }
+
 
 h2 {
     font-size: x-large;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', serif;
+}
+
+p {
+    text-align: justify;
 }
 
 a:visited {
@@ -30,6 +38,7 @@ a.normal:hover {
     color: #000000;
     text-decoration: none;
 }
+
 
 
 .main {

@@ -31,7 +31,6 @@ $(document).ready(function() {
 
 JSVis is an object visualization for JavaScript code. It runs through all the objects it can 
 find in the global namespace and shows their relationships in a node-link vis.
-
 It uses the awesome [JavaScript InfoVis Toolkit](http://thejit.org/) to do the heavy visualization
 lifting. 
 
@@ -40,7 +39,6 @@ To try it out click <a id="btnHere" href="#">here</a>.
 This was originally a class project and you can check out the project 
 [website](http://www.soe.ucsc.edu/classes/cmps261/Spring10/projects/projects/tdisney/proj/index.html) 
 for some of the rational behind it. 
-
 The latest and greatest code (and maybe documentation) can be found on 
 [github](http://github.com/disnet/jsvis).
 
