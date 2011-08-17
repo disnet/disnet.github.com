@@ -28,5 +28,6 @@ My <a href="cv.pdf">CV</a>.
 Recent Publications
 -------------------
 
+[\[pdf\]](/papers/oopsla054-austin.pdf) Virtual Values for Language Extension \(OOPSLA 2011\) <br />
 [\[pdf\]](/papers/icfp046-disney.pdf) Temporal Higher-Order Contracts \(ICFP 2011\) <br />
 [\[pdf\]](/papers/disney_stop11.pdf) Gradual Information Flow Typing \(STOP 2011\)
