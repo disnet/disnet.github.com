@@ -5,6 +5,10 @@ body {
     background-color: #F0F5F3
 }
 
+pre {
+    background-color: lightgray;
+}
+
 
 h1 {
     /* font-family: georgia,'bitstream vera sans serif','lucida grande',helvetica,verdana,sans-serif*/
