@@ -6,6 +6,7 @@ body {
 }
 
 pre {
+    padding: 4px;
     background-color: lightgray;
 }
 
