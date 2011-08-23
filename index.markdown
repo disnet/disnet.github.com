@@ -21,7 +21,8 @@ find me on
 <a href="https://pinboard.in/u:disnet/public/" rel="me">Pinboard</a>, 
 and <a href="http://www.flickr.com/people/timdisney" rel="me">Flickr</a>.
 
-I am also reachable via email: tim.disney@<span style="display:none">null</span>gmail.com
+You can contact me via twitter [@disnet](http://twitter.com/disnet) or
+email: tim.disney@<span style="display:none">null</span>gmail.com
 
 My <a href="cv.pdf">CV</a>.
 
