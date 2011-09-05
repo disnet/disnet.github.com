@@ -5,11 +5,11 @@ title: Duck-Typing Invariants In contracts.coffee
 
 So the response I've been getting for [contracts.coffee](http://disnetdev.com/contracts.coffee/) has been absolutely incredible! There's been tons of positive feedback and some really great excitement about the project.
 
-I've also heard a few worries that contracts are too much like static types and might not be such a good fit for a dynamic language like CoffeeScript or JavaScript. Now, I don't want to get into a huge debate over the merits of static vs. dynamic typing (that way leads to madness and holy wars!) but I would like to clarify a few points and say that I really think contracts fit very nicely into the dynamic "ethos" of CoffeeScript/JavaScript.
+I've also heard a few worries that contracts are too much like static types and might not be such a good fit for a dynamic language like CoffeeScript or JavaScript. Now, I don't want to get into a huge debate over the merits of static vs. dynamic typing (that way leads to madness and holy wars!) but I would like to clarify a few points and show that contracts actually fit quite nicely into the dynamic ethos of CoffeeScript/JavaScript.
 
-In dynamic languages like CoffeeScript and JavaScript you'll often hear about [duck typing](http://en.wikipedia.org/wiki/Duck_typing) where we don't care about the "type" of an object (I'm being fast and loose in my wording here, don't get mad), just the stuff on the object we actually need to use. So the classic example is a "file-like" object where all we care about are the few properties the code actually uses (like `open`, `read`, `close`, etc.). As long as the properties exist we're good. If a property don't exist and we try to use it, just throw an exception so we can track down the bug.
+In dynamic languages like CoffeeScript and JavaScript you'll often hear about [duck-typing](http://en.wikipedia.org/wiki/Duck_typing) where we don't care about the "type" of an object, just the stuff on the object we actually need to use. So the classic example is a "file-like" object where all we care about are the few properties the code actually uses (like `open`, `read`, `close`, etc.). As long as the properties exist we're good. If a property don't exist and we try to use it, just throw an exception so we can track down the bug.
 
-Contracts allow us to extend this concept quite a lot without sacrificing the awesome flexibility we dynamic language users love about duck typing. To start out, let's consider the simple case of a missing property. Let's first define a contract for a binary tree:
+Contracts allow us to extend this concept quite a lot without sacrificing the awesome flexibility we dynamic language users love about duck-typing. To start out, let's consider the simple case of a missing property. Let's first define a contract for a binary tree:
 
 
 {% highlight coffeescript %}
@@ -53,20 +53,25 @@ Parent contracts:
 {node: Num, left: self or Null, right: self or Null}
 Null or {node: Num, left: self or Null, righ : self or Null}
 (Null or {node: Num, left: self or Null, right: self or Null}) 
-  -&gt; any 
+  -&gt; any
 </pre>
 
-Now we already have an obvious win over no contracts since we fail as soon as we try to access the property that doesn't exist. If we weren't using contracts, the variable `n` in the example above would get the value `undefined` which might not surface as an obvious problem until much later. We also haven't lost any flexibility since all we've done is specify with contracts exactly what our code requires (we're being explicit about how our ducks quack); we're not setting up complicated type hierarchies to appease a static type system (don't get mad static type affectionados: I like static types too, just not in my Coffee!).
+Now we're already winning since the error message is triggered as soon as the function is called with an object that is missing the required properties. If we weren't using contracts, the variable `n` in the example above would get the value `undefined` which might not surface as an obvious problem until much later (if ever!).
+
+
+We're also not losing any of the flexibility of duck-typing 
+since contracts allow us to specify just the object properties the function needs in order to work properly.
+We're just being explicit about how our ducks should quack!
 
 In addition to an early failure, we get lots of information in the error message about what was missing, which contract was violated, and which module was to blame (a powerful notion I explain a little [here](http://disnetdev.com/contracts.coffee/#use) but which really deserves a future blog post).
 
 But we're just getting warmed up :)
 
-Objects can also have arbitrary invariants that get checked whenever properties are changed. So we can have a contract for a binary search tree:
+Contracts on objects can also have arbitrary invariants that get checked whenever properties are modified. So we can have a contract for a binary search tree:
 
 {% highlight coffeescript %}
 # A binary search tree is a binary tree where each node is 
-# greater than the right child but less than the left child
+# greater than the left child but less than the right child
 BinarySearchTree = ?(Null or {
   node: Num
   left: Self or Null
@@ -80,7 +85,7 @@ And a [red-black tree](http://en.wikipedia.org/wiki/Red-black_tree):
 
 {% highlight coffeescript %}
 # A red-black tree is a binary search tree 
-# that maintains a balance
+# that keeps its balance
 RedBlackTree = ?(Null or {
   node: Num
   color: Str
@@ -97,7 +102,7 @@ RedBlackTree = ?(Null or {
 })
 {% endhighlight %}
 
-Note that our contract for a red-black tree is exactly the same as a binary search tree with the addition of the `color` property and some related invariants. We have a kind of subtyping going on here: code that expects a binary search tree will also work with a red-black tree but *not* visa versa.
+Note that our contract for a red-black tree is exactly the same as a binary search tree with the addition of the `color` property and some related invariants. We have a kind of subtyping going on here: a function that expects a binary search tree will also work with a red-black tree but *not* vica versa.
 
 Now our functions can "duck-type" the invariants on the objects they accept:
 
@@ -120,3 +125,5 @@ takesRedBlack bst # might fail if the full
 {% endhighlight %}
 
 These functions not only specify that they require certain properties but also that certain invariants must hold. This is really powerful! The function that only requires the behavior of a binary search tree can accept a red-black tree just fine and the function that requires the behavior of a red-black tree but is given just a binary search tree will probably fail (just as we want it to).
+
+So, contracts allow us to be explicit and fail early when things go wrong while still giving us the flexibility of duck-typing. And they work for both "missing-property" kinds of failures along with a more general "failed invariant".
