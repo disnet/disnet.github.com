@@ -124,6 +124,6 @@ takesRedBlack bst # might fail if the full
                   # red-black invariants don't hold!
 {% endhighlight %}
 
-These functions not only specify that they require certain properties but also that certain invariants must hold. This is really powerful! The function that only requires the behavior of a binary search tree can accept a red-black tree just fine and the function that requires the behavior of a red-black tree but is given just a binary search tree will probably fail (just as we want it to).
+These functions not only specify that they require certain properties but also that certain invariants must hold. This is really powerful! The function that only requires the behavior of a binary search tree can accept a red-black tree just fine and the function that requires the behavior of a red-black tree but is given just a binary search tree will  fail when the invariants are violated (just as we want it to).
 
 So, contracts allow us to be explicit and fail early when things go wrong while still giving us the flexibility of duck-typing. And they work for both "missing-property" kinds of failures along with a more general "failed invariant".
