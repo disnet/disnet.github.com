@@ -77,7 +77,7 @@ BinarySearchTree = ?(Null or {
   left: Self or Null
   right: Self or Null
   | invariant: ->
-    (@.node > @.left.node) and (@.node < @.right.node)
+    (@.node >= @.left.node) and (@.node < @.right.node)
 })
 {% endhighlight %}
 
@@ -98,7 +98,7 @@ RedBlackTree = ?(Null or {
     else 
       true
     ) and
-    (@.node >= @.left.node) and (@.node >= @.right.node) and
+    (@.node >= @.left.node) and (@.node < @.right.node)
 })
 {% endhighlight %}
 
