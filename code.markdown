@@ -11,6 +11,13 @@ scripts:
 - /code/jsvis.js
 ---
 
+contracts.coffee
+----------------
+
+contracts.coffee is a dialect of CoffeeScript with build-in support
+for contracts. A full description and documentation is on its
+[web site](http://disnetdev.com/contracts.coffee/)
+
 JSVis
 -----
 
