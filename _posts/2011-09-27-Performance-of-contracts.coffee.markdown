@@ -5,7 +5,7 @@ layout: post
 
 I've been meaning to get around to running some performance benchmarks on contracts.coffee, but I recently learned a valuable lesson: let the internet do your work for you! :-)
 
-I woke up this morning to find [@paulmillr](https://twitter.com/#!/paulmillr) had put together a nice performance [benchmark](http://jsperf.com/performance-impact-of-contracts/2) of contracts.coffee.
+I woke up this morning to find [@paulmillr](https://twitter.com/#!/paulmillr) had put together a nice performance [benchmark](http://jsperf.com/performance-impact-of-contracts) of contracts.coffee.
 
 Check it out for all the gory details but suffice it to say contracts makes things...slow. This is about what I'd expected since in addition to running the actual contract check we must wrap the contracted functions/objects in a Proxy which runs handlers for each function call or property set/get. Lots of stuff is in the way of the running code.
 
