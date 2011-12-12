@@ -1,6 +1,5 @@
 body {
-    /* font-family: 'Maven Pro', serif; /* Helvetica, Arial, sans-serif;*/
-    font-family: 'Molengo', serif; 
+    font-family: 'Petrona', serif;
     font-size: large;
     background-color: #F0F5F3
 }
@@ -12,15 +11,20 @@ pre {
 
 
 h1 {
-    /* font-family: georgia,'bitstream vera sans serif','lucida grande',helvetica,verdana,sans-serif*/
-    font-family: 'Molengo', serif;
+    font-family: 'Petrona', serif;
+    font-weight: 400;
 }
-
 
 h2 {
-    font-size: x-large;
-    font-family: 'Open Sans', serif;
+    font-family: 'Signika', sans-serif;
+    font-weight: 400;
 }
+
+h3 {
+    font-family: 'Signika', sans-serif;
+    font-weight: 400;
+}
+
 
 p {
     text-align: justify;
@@ -53,7 +57,26 @@ a.normal:hover {
 }
 
 
+article.paper hgroup h1 {
+    margin-bottom: 0;
+
+    font-family: 'Signika', sans-serif;
+    font-weight: 400;
+}
+article.paper hgroup h2 {
+    font-family: 'Signika', sans-serif;
+    font-weight: 400;
+
+    margin-top: 0;
+    padding-left: 20px;
+    font-size: large;
+}
+article .pub-links {
+    font-family: 'Signika', sans-serif;
+}
+
 .navitem {
+    font-family: 'Muli', sans-serif;
     float:left;
     margin-right:20px;
 }
