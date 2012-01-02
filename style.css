@@ -75,6 +75,10 @@ article .pub-links {
     font-family: 'Signika', sans-serif;
 }
 
+div.content p {
+    font-size: x-large;
+}
+
 .navitem {
     font-family: 'Muli', sans-serif;
     float:left;
