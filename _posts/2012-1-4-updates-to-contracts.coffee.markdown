@@ -4,8 +4,9 @@ title: Updates to contracts.coffee
 ---
 
 An update to contracts.coffee (0.2.0) is now up on npm. I've fixed up 
-a few bugs since the intial release but the big update is a rework of how 
-modules are handled.
+a few bugs since the intial release and it's now based on the 
+latest CoffeeScript (1.2.0)
+but the big update is a rework of how modules are handled.
 
 Before this update we were handling module blame tracking by forcing the
 programmer to call `.use()` before a contracted value could be used. This
