@@ -8,9 +8,9 @@ a few bugs since the intial release but the big update is a rework of how
 modules are handled.
 
 Before this update we were handling module blame tracking by forcing the
-programmer to call `.use()` before a contracted value could be used. Calling
-that function did the work of figuring out who the server and client module
-were for blame.
+programmer to call `.use()` before a contracted value could be used. This
+did the work of figuring out who the server and client module.
+
 
 This was an awkward way to enforce a module pattern since not only do you have to
 write more code but it also means you have to know which values in a 
@@ -43,7 +43,7 @@ the module), but the module name might get confusing since it's just the file na
 [nested boundaries](http://docs.racket-lang.org/reference/Attaching_Contracts_to_Values.html#%28part._.Nested_.Contract_.Boundaries%29) 
 to clean this up at some point.
 
-If you're using the browser things are a bit more complicated. Since the browser environment 
+If you're using the browser, things are a bit more complicated. Since the browser environment 
 doesn't currently have a standard way to do modules, we're stuck doing the wiring by hand. 
 Details are in the [documentation](http://disnetdev.com/contracts.coffee/) but the basic idea is that
 the library now provides `Contracts.exports` and `Contracts.use` which are used to construct
