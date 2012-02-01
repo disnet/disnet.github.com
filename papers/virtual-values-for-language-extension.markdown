@@ -9,6 +9,8 @@ published:
         link: /papers/oopsla054-austin.pdf
       - name: Slides
         link: /talks/virtual_values.pdf
+      - name: Lightning talk
+        link: /talks/virtual_values_lightning.pdf
 authors: 
   - name: Thomas H. Austin
     link: http://users.soe.ucsc.edu/~taustin/
