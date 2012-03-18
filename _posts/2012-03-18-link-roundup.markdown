@@ -15,8 +15,8 @@ use, etc.) by 2050. Cute.
 
 Game of Thrones is [available at long last online][amz] but [who's complaining][got].
 
-The NSA is apparently [building a huge data center][nsa] in Utah.
-Personally, I'm not too [worried about my civil liberties][wire].
+The NSA is apparently [building a massive data center][nsa] in Utah. This
+doesn't [concern me at all][wire].
 
 
 [wire]: http://en.wikipedia.org/wiki/NSA_warrantless_surveillance_controversy "Warrantless Wiretapping"
