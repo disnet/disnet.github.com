@@ -33,14 +33,25 @@
 
 <body>
   <div class="main">
-      <h1 style="font-size: 48px;">Tim Disney</h1>
+      <h1 style="text-align:center">Tim Disney</h1>
 
-      <div class="nav">
+      <nav>
+        <ul>
+          <li class="first"><a href="/index.html">about</a></li>
+          <li><a href="/papers.html">papers</a></li>
+          <li><a href="/blog">blog</a></li>
+        </ul>
+      </nav>
+      
+      <!--
+      <div class="nav" style="margin-left:auto; margin-right:auto;
+      width: 300px;">
           <div class="navitem"><a href="/index.html">about</a></div>
           <div class="navitem"><a href="/papers.html">papers</a></div>
           <div class="navitem"><a href="/blog">blog</a></div>
           <div style="clear:both"></div>
       </div>
+      -->
 
       <div class="content hyphenate">
         {{content}} 

@@ -13,6 +13,7 @@ pre {
 h1 {
     font-family: 'Petrona', serif;
     font-weight: 400;
+    font-size: 48px;
 }
 
 h2 {
@@ -76,17 +77,12 @@ article .pub-links {
 }
 
 div.content p {
-    font-size: x-large;
-}
-
-.navitem {
-    font-family: 'Muli', sans-serif;
-    float:left;
-    margin-right:20px;
+    font-size: 15pt;
 }
 
 .content {
     width: 600px;
+    margin-top: 50px;
 }
 
 .footer {
@@ -103,7 +99,34 @@ div.content p {
 .postmetadata {
   margin-top: 10px;
   margin-bottom: 5px;
-  border-bottom: 1px solid black;
-  padding-bottom: 4px;
+  border-bottom: 1px dashed lightgray;
+  padding-bottom: 10px;
   font-size:medium;
+  text-align: right;
+  color: gray;
+}
+
+.post {
+    margin-bottom: 50px;
+}
+
+code {
+    font-size: 12pt;
+}
+
+nav {
+    margin-top: -20px;
+    text-align: center;
+}
+nav ul {
+    display:inline;
+    padding: 0;
+}
+nav li.first {
+    margin-left: 0;
+}
+nav li {
+    display: inline;
+    font-family: 'Muli', sans-serif;
+    margin-left: 20px;
 }

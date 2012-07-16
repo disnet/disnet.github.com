@@ -10,7 +10,9 @@ with a different name (just as PIPA is the new [COICA][2]).
 
 It's time to strike the [root][3].
 
-<iframe src="http://player.vimeo.com/video/31447296?title=0&amp;byline=0&amp;portrait=0&amp;color=fbca54" width="600" height="425" frameborder="0"></iframe>
+<iframe
+src="http://player.vimeo.com/video/31100268?byline=0&amp;portrait=0"
+width="600" height="425" style="border:0"> </iframe>
 
 [1]: http://www.readwriteweb.com/enterprise/2012/01/what-i-wish-wikipedia-and-othe.php "ReadWriteWeb"
 [2]: http://en.wikipedia.org/wiki/Combating_Online_Infringement_and_Counterfeits_Act "COICA"
