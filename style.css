@@ -1,7 +1,7 @@
 body {
     font-family: 'Petrona', serif;
     font-size: large;
-    background-color: #F0F5F3
+    /* background-color: #F0F5F3 */
 }
 
 pre {
@@ -76,7 +76,7 @@ article .pub-links {
     font-family: 'Signika', sans-serif;
 }
 
-div.content p {
+div.content {
     font-size: 15pt;
 }
 
