@@ -50,13 +50,13 @@ the browser).
 Then compile your LLJS code with the `-m` flag:
 
 {% highlight bash %}
-bin/ljc -m your_file.ljs
+bin/ljc -m -o your_file.js your_file.ljs
 {% endhighlight %}
     
 and run it:
 
 {% highlight bash %}
-node --harmony-proxies your_file.ljs
+node --harmony-proxies your_file.js
 {% endhighlight %}
   
 As you can see the memory checker uses [Proxies][proxy], which node/V8
