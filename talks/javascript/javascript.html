@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JavaScript - A Short Introduction</title>
+
+		<meta name="description" content="An introduction to the JavaScript language">
+		<meta name="author" content="Tim Disney">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section data-markdown>
+					<script type="text/template">
+					# JavaScript
+					## a short introduction
+					</script>
+				</section>
+
+				<!-- getting started -->
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						## History
+
+						* Created in 1995 by Brendan Eich in ten days
+						* Wanted to make Scheme for the browser
+						* Considered a toy language for many years
+						* Web 2.0 and the rise of web apps changed that
+							* gmail
+							* google maps
+							* etc.
+						</script>
+					</section>
+
+					<section>
+						<h2>The Name</h2>
+						<blockquote cite="http://stackoverflow.com/a/245068/14481">
+							Java and JavaScript are similar like Car and Carpet are similar.
+						</blockquote>
+
+					</section>
+				</section>
+
+				<!-- getting started -->
+				<section data-markdown>
+					<script type="text/template">
+						## Getting Started
+
+						* [Firefox dev tools](https://blog.mozilla.org/devtools/)
+						* [Chrome dev tools](https://developers.google.com/chrome-developer-tools/)
+						* [Firebug](https://getfirebug.com/)
+						* [Node.js command line](http://nodejs.org/)
+					</script>
+				</section>
+
+
+				<!-- basics -->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						## Basic Data
+
+							// numbers
+							115 * 4 - 4 + 88 / 2;
+							2.998e8; // 299800000
+
+							// strings
+							"hello, world";
+							"This is the first line\nAnd this is the second";
+
+							// boolean
+							true;
+							false;
+							10 > 5 		// true
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Variables
+
+							var powerLevel = 9000;
+							powerLevel++;
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Some Builtin Functions
+
+							Math.max(10, 20, 5, 50); 			// 50
+							"i like javascript".toUpperCase(); 	// I LIKE JAVASCRIPT
+						</script>
+					</section>
+
+				</section>
+
+				<!-- control -->
+				<section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Control
+
+							var currentNumber = 0;
+							while (currentNumber <= 12) {
+								console.log(currentNumber);
+								currentNumber += 2;
+							}						
+						</script>
+					</section>
+
+					<section data-markdown>
+
+						<script type="text/template">
+						## Control
+
+							for (var number = 0; number <= 12; number = number + 2) {
+								console.log(number); 
+							}
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Control
+
+							for (var counter = 0; counter < 20; counter++) {
+								if (counter % 3 === 0 && counter % 4 === 0) {
+								    console.log(counter);
+								}
+							}						
+						</script>
+					</section>
+
+				</section>
+
+				<!-- type conversions -->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						## implicit type conversions
+
+							100 + "1"; 		// "1001"
+							100 - "1"; 		// 99
+
+							"100" + 1; 		// "1001"
+							"100" - 1; 		// 99
+
+							"Hello" + 100 	// "Hello100"
+							"Hello" - 100 	// NaN
+
+						Use the `parseInt`/`parseFloat` functions when dealing with strings and numbers
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+						## `==` vs `===`
+
+							'' == '0'           // false
+							0 == ''             // true
+							0 == '0'            // true
+
+							false == 'false'    // false
+							false == '0'        // true
+
+							false == undefined  // false
+							false == null       // false
+							null == undefined   // true
+
+							' \t\r\n ' == 0     // true
+						</script>
+					</section>
+				</section>
+
+				<!-- functions -->
+				<section>
+<!-- 					<section data-markdown>
+						<script type="text/template">
+						## Functions
+
+							function add(a, b) {
+								return a + b;
+							}
+							add(2, 40); 	// 42
+						</script>
+					</section>
+ -->
+					<section data-markdown>
+						<script type="text/template">
+						## Functions
+
+							function power(base, exponent) {
+								var result = 1;
+								for (var count = 0; count < exponent; count++) {
+							    	result *= base;
+								}
+							 	return result;
+							}
+
+							power(2, 10);
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							var variable = "top-level";
+
+							function printVariable() {
+							  console.log("in printVariable: " + variable);
+							}
+
+							function test() {
+							  var variable = "test";
+							  console.log("in test:" + variable);
+							  printVariable();
+							}
+
+							test();						
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							var variable = "top-level";
+
+							function printVariable() {
+							  console.log("in printVariable: " + variable);
+							}
+
+							function test() {
+							  variable = "test";
+							  console.log("in test:" + variable);
+							  printVariable();
+							}
+
+							test();						
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							var variable = "top-level";
+
+							function parentFunction() {
+							  var variable = "local";
+							  function childFunction() {
+							    console.log(variable);
+							  }
+							  childFunction();
+							}
+							parentFunction();						
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							function run() {
+								var something = 1;
+
+								if (true) {
+								  var something = 2;
+								  console.log("Inside: " + something);
+								}
+
+								console.log("Outside: " + something); 
+							}
+							run();
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							var variable = "top-level";
+
+							function parentFunction() {
+							  var variable = "local";
+							  function childFunction() {
+							    console.log(variable);
+							  }
+							  childFunction();
+							}
+							parentFunction();						
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							var variable = "top-level";
+
+							function parentFunction() {
+								var variable = "local";
+								function childFunction() {
+									console.log(variable);
+								}
+								return childFunction;
+							}
+							var child = parentFunction();						
+							child();
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Functions - Scoping
+
+							function makeAddFunction(amount) {
+								function add(number) {
+									return number + amount;
+								}
+								return add;
+							}
+
+							var addTwo = makeAddFunction(2);
+							var addFive = makeAddFunction(5);
+							console.log(addTwo(1) + addFive(1));
+						</script>
+					</section>
+
+				</section>
+
+				<!-- data structures -->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						## Objects
+
+							var cat = {
+								color: "grey", 
+								name: "Spot", 
+								size: 46
+							};
+							cat.size = 47;
+							cat["size"] = 50;
+							cat.age = 3;
+							delete cat.color;
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Arrays
+
+							var grades = [99, 100, 89, 95];
+							console.log(grades[1]); 	// 100
+							console.log(grades.length);	// 4
+							grades[1000] = 70;
+							console.log(grades.length);	// 1001
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Arrays - Just objects
+
+							var grades = {
+								0: 99,
+								1: 100,
+								2: 89,
+								3: 95
+							};
+						</script>
+					</section>
+				</section>
+
+				<!-- OO -->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						## OOP
+
+						Attach functions to objects:
+
+							var rabbit = {};
+							rabbit.speak = function(line) {
+							  console.log("The rabbit says: " + line);
+							};
+
+							rabbit.speak("Well, now you're asking me.");						
+						</script>
+					</section>
+
+					<section>
+						<img src="single_object.png" />
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## OOP
+
+						Multiple objects:
+
+							function speak(line) {
+								console.log("The " + this.adjective 
+											+ " rabbit says: " + line);
+							}
+							var whiteRabbit = {adjective: "white", speak: speak};
+							var fatRabbit = {adjective: "fat", speak: speak};
+
+							whiteRabbit.speak("Oh my ears and whiskers!");
+							fatRabbit.speak("I could sure use a carrot right now.");
+						</script>
+					</section>
+
+					<section>
+						<img src="two_objects.png" />
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## OOP
+
+						The `new` keyword creates new objects.
+
+							function Rabbit(adjective) {
+							  this.adjective = adjective;
+
+							  this.speak = function(line) {
+							    console.log("The " + this.adjective 
+							    			+ " rabbit says " + line);
+							  };
+							}
+
+							var killerRabbit = new Rabbit("killer");
+							killerRabbit.speak("GRAAAAAAAAAH!");						
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## OOP
+
+							function Rabbit(adjective) {
+								this.adjective = adjective;
+							}
+
+							Rabbit.prototype.speak = function(line) {
+							    console.log("The " + this.adjective 
+							    			+ " rabbit says " + line);
+							};
+
+							var hazelRabbit = new Rabbit("hazel");
+							var fatRabbit = new Rabbit("fat");
+							hazelRabbit.speak("Good Frith!");
+							fatRabbit.speak("I could sure use a carrot right now.");
+						</script>
+					</section>
+
+					<section>
+						<img src="prototype.png" />
+					</section>
+
+					<section>
+						<img src="hierarchy.png" />
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## OOP - Monkey Patching
+
+							var arr = [1, 2, 3, 4, 5, 6, 7, 8, 8, 10];
+
+							Array.prototype.head = function() {
+								return this[0];
+							};
+							Array.prototype.tail = function() {
+								return this.slice(1);
+							};
+
+							console.log(arr.head()); 	// 1
+							console.log(arr.tail());	// [2, 3, 4, 5, 6, 7, 8, 9, 10]
+						</script>
+					</section>
+
+
+				</section>	
+
+				<!-- wrap up -->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						## Resources - Learning
+
+						* [MDN](https://developer.mozilla.org/en-US/)
+						* [Web Platform Docs](http://www.webplatform.org/)
+						* [Eloquent JavaScript (creative commons book)](http://eloquentjavascript.net/contents.html)
+						* [JavaScript: The Good Parts (book)](http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742)
+
+						* [w3schools (avoid)](http://www.w3schools.com/js/default.asp)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Resources - Libraries
+
+						* [jQuery (DOM manipulation)](http://jquery.com/)
+						* [Node.js (server side JS)](http://nodejs.org/)
+						* [jster (collection of libraries)](http://jster.net/)
+
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Credits
+
+						Slides powered by [reveal.js](https://github.com/hakimel/reveal.js)
+
+						Code examples from [Eloquent JavaScript](http://eloquentjavascript.net/contents.html)
+						</script>
+					</section>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="jquery-1.8.2.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
