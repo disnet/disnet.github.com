@@ -1,9 +1,9 @@
 ---
-title: How to read for macros
+title: How to read macros
 layout: post
 ---
 
-In my last [post][sweetintro] I gave a little overview about [sweet.js][sweetjs] the hygienic macro system I built over the summer. Today I want to write a little bit about what makes sweet.js possible and why we haven't really seen a macro system for JavaScript before now. I gave hints at some of this in my intern [talk][talk] but now we can finally do a deep dive!
+In my last [post][sweetintro] I gave a little overview of [sweet.js][sweetjs] the hygienic macro system I built over the summer. Today I want to write a little bit about what makes sweet.js possible and why we haven't really seen a macro system for JavaScript before now. I gave hints at some of this in my intern [talk][talk] but now we can finally do a deep dive!
 
 ## Basics
 
@@ -70,7 +70,7 @@ The AST gives you the structure necessary to do code optimization/generation etc
 
 So where can we fit macros into this picture? Which representation is best for macros to do their stuff?
 
-Well, by the time we get to an AST it's too late since parsers only understand a fixed grammar (well, technically there is research on [adaptive grammars][adapt] but this way leads to madness!). Obviously the raw code as a string is too unstructured for macros so how about the array of tokens produced by the lexer?
+Well, by the time we get to an AST it's too late since parsers only understand a fixed grammar (well, technically there is research on [adaptive/extensible grammars][adapt] but that way leads to madness!). Obviously the raw code as a string is too unstructured for macros so how about the array of tokens produced by the lexer?
 
 
 Tokens are fine for cpp `#define` style macros but we want moar power! And, as it turns out, just normal tokens aren't going to cut it for us. Consider this simple macro that provides a concise way to define functions:
@@ -84,7 +84,7 @@ Tokens are fine for cpp `#define` style macros but we want moar power! And, as i
         return a + b;
     }
 
-which should be transformed into:
+which should be expanded into:
 
     function add(a, b) {
         return a + b;
@@ -94,7 +94,7 @@ Critically, note that the macro needs to match `$params` with `(a, b)` and `$bod
 
 If you remember your compilers class (or went to wikipedia), delimiter matching is what separates [context-free][ctx] languages (what parsers recognize) from [regular][reg] languages (what lexers recognize).
 
-This is one of the reasons why macros are big in the lisp family of languages (scheme, racket, clojure, etc.). S-expressions (with (all (those (parentheses)))) are already fully delimited so it becomes almost trivial to do delimiter matching. Some people call this homoiconicity but as Dave Herman [pointed out][icon], homoiconicity isn't really the point. It's not that the lisp family is homoiconic but rather that the nature of s-expressions makes it easy to implement `read`.
+This is one of the reasons why macros are big in the lisp family of languages (scheme, racket, clojure, etc.). S-expressions (with (all (those (parentheses)))) are already fully delimited so it becomes almost trivial to do delimiter matching. Some people say this is due to [homoiconicity][homo] but as Dave Herman [pointed out][icon], homoiconicity isn't really the point. It's not that the lisp family is homoiconic but rather that the nature of s-expressions makes it easy to implement `read` which is necessary for macros.
 
 `read` is the crucial function that gives a little bit more structure to the array of tokens by matching up all those delimiters. Now instead of just a flat array of tokens we are going to get a *read tree:*
 
@@ -140,7 +140,7 @@ But, we can't use the parsing context in `read` because we don't have any parsin
 
 So, we somehow need to separate the lexer/reader from the parser.
 
-Now you might think we could get away with just leaving `/` as an ambiguous token (a `divOrRegex` token) to be handled by the parser once all the macros have been expanded away but consider this code fragment we might want to `read`:
+Now you might think we could get away with just leaving `/` as an ambiguous token (say a `divOrRegex` token for example) to be handled by the parser once all the macros have been expanded away but consider this code fragment we might want to `read`:
 
     ... { /foo}bar/ ...
     // as a token array this would be
@@ -150,9 +150,9 @@ Remember that the entire point of `read` is to do delimiter matching, so should 
 
 Therefore, in our lexer/reader we **must** disambiguate the meaning of `/` without the help of the parser. So how do we do that?
 
-This is the hard technical problem that [Paul Stansifer][paul] (he designed the [Rust][rust] macro system and is super cool) solved this summer, unlocking the power of JavaScript macros for everyone!
+This is the hard technical problem that [Paul Stansifer][paul] (he also designed the [Rust][rust] macro system) solved this summer, unlocking the power of JavaScript macros for us all!
 
-The basic idea is when you see a `/` as you are reading, just look back a couple of tokens and a small fixed set of tokens will determine unambiguously if `/` should be a divide or the start of a regex literal. To figure out exactly how far back and which tokens to look for requires staring at JavaScript grammar for a long time but Paul and I did that so you don't have to!
+The basic idea is when you see a `/` as you are reading, just look back a couple of tokens and a small fixed set of tokens will determine unambiguously if `/` should be a divide or the start of a regex literal. To figure out exactly how far back and which tokens to look for requires working through all the different cases in the JavaScript grammar which is hard but done!
 
 A snippet of this algorithm goes something like:
 
@@ -174,11 +174,12 @@ When we see the `/` we note that the previous token was `)` so we find its match
 
 What's really cool here is that when we need to disambiguate `/` we've already been reading up to that point so `(foo + 24 > bar)` is a single token (the `()` token with inner tokens `foo`, `+`, `24`, `>`, and `bar`) and checking the token before the parens is literally as simple as `tokens[idx-2] === "if"`. By creating the read tree as we go along we don't need to carry lookbehind state in a complicated way; in fact, in the worst case, we only have to look back 5 tokens.
 
-If you want to read more about how this works, I've got the algorithm pseudo-coded up [here][readdesign] and the actual JavaScript implementation in these relatively short [two][read1] [functions][read2].
+If you want to read more about how this works, I've got the entire algorithm pseudo-coded up [here][readdesign] and the actual JavaScript implementation in these relatively short [two][read1] [functions][read2].
 
 [sweetjs]: http://sweetjs.org/ "Sweet.js"
 [sweetintro]: http://disnetdev.com/blog/2012/10/14/hygienic-macros-for-javascript/ "Hygienic Macros for JavaScript"
 [icon]: http://calculist.org/blog/2012/04/17/homoiconicity-isnt-the-pointk "Homoiconicity isn't the point"
+[homo]: http://en.wikipedia.org/wiki/Homoiconicity "Homoiconicity"
 [adapt]: http://en.wikipedia.org/wiki/Adaptive_grammar "Adaptive Grammar"
 [talk]: https://air.mozilla.org/sweetjs/ "Sweet.js Talk"
 [esprima]: http://esprima.org/ "Esprima"
