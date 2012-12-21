@@ -178,7 +178,7 @@ If you want to read more about how this works, I've got the entire algorithm pse
 
 [sweetjs]: http://sweetjs.org/ "Sweet.js"
 [sweetintro]: http://disnetdev.com/blog/2012/10/14/hygienic-macros-for-javascript/ "Hygienic Macros for JavaScript"
-[icon]: http://calculist.org/blog/2012/04/17/homoiconicity-isnt-the-pointk "Homoiconicity isn't the point"
+[icon]: http://calculist.org/blog/2012/04/17/homoiconicity-isnt-the-point "Homoiconicity isn't the point"
 [homo]: http://en.wikipedia.org/wiki/Homoiconicity "Homoiconicity"
 [adapt]: http://en.wikipedia.org/wiki/Adaptive_grammar "Adaptive Grammar"
 [talk]: https://air.mozilla.org/sweetjs/ "Sweet.js Talk"
