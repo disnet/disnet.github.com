@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>JavaScript - A Short Introduction</title>
+
+        <meta name="description" content="An introduction to the JavaScript language">
+        <meta name="author" content="Tim Disney">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <link rel="stylesheet" href="css/print/pdf.css" type="text/css" media="print">
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section data-markdown>
+                    <script type="text/template">
+                    # JavaScript
+                    </script>
+                </section>
+
+                <!-- getting started -->
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Overview
+
+                        * Created at Netscape by Brendan Eich in ten days
+                          * a nice core language (Scheme, Self influences)
+                          * but some warts
+                        * Considered a toy language for many years
+                        * Web 2.0 and the rise of web apps changed that
+                            * gmail
+                            * google maps
+                            * etc.
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Overview
+
+                        - Features
+                          - Strict
+                          - Functional
+                          - Object Oriented (prototype based)
+                          - Untyped (aka dynamically typed)
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### The Name
+
+                        - JavaScript - Trademark of Sun, now Oracle
+
+                        - ECMAScript - The Ecma standard
+                          - ES1-3 (1999)
+                          - ES5 (2009)
+                          - ES6 (In progress)
+                        </script>
+                    </section>
+
+                    <section>
+                        <h3>The Name</h3>
+                        <blockquote cite="http://stackoverflow.com/a/245068/14481">
+                            Java is to JavaScript as Car is to Carpet
+                        </blockquote>
+
+                    </section>
+                </section>
+
+                <!-- getting started -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ### Getting Started
+
+                        * [Firefox dev tools](https://blog.mozilla.org/devtools/)
+                        * [Chrome dev tools](https://developers.google.com/chrome-developer-tools/)
+                        * [Firebug](https://getfirebug.com/)
+                        * [Node.js command line](http://nodejs.org/)
+                    </script>
+                </section>
+
+
+                <!-- basics -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Basic Data
+
+                            // numbers
+                            var n = 115 * 4 - 4 + 88 / 2;
+
+                            var partOfPi = 3.14159265359;
+                            0.2 + 0.1; // 0.30000000000000004
+
+                            // strings
+                            var msg = "hello, world";
+
+                            // boolean
+                            var flag = true;
+                            var b = (5 * 2) > 5;
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Variables are mutable
+
+                        ```
+                        var powerLevel = 9000;
+                        ```
+
+                        ```language-javascript
+                        > powerLevel++;
+                        9001
+                        ```
+
+                        </script>
+                    </section>
+
+<!--                     <section data-markdown>
+                        <script type="text/template">
+                        ## Some Builtin Functions
+
+                            Math.max(10, 20, 5, 50);            // 50
+                            "i like javascript".toUpperCase();  // I LIKE JAVASCRIPT
+                        </script>
+                    </section>
+ -->
+                </section>
+
+                <!-- control -->
+                <section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Control
+
+                        ```
+                        var curr = 0;
+                        while (curr <= 12) {
+                            console.log(curr);
+                            curr += 2;
+                        }
+                        ```
+
+                        ```
+                        // prints out:
+
+                        0
+                        2
+                        4
+                        ...
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+
+                        <script type="text/template">
+                        ## Control
+
+                            for (var curr = 0; curr <= 12; curr += 2) {
+                                console.log(curr);
+                            }
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Control
+
+                            for (var curr = 0; curr < 20; curr++) {
+                                if (curr % 3 === 0 && curr % 4 === 0) {
+                                    console.log(curr);
+                                }
+                            }
+
+                        Notice anything odd?
+                        </script>
+                    </section>
+
+                </section>
+
+                <!-- type conversions -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Implicit Type Conversions
+
+                        ``` language-javascript
+                        > 100 + "1"
+                        "1001"
+                        > 100 - "1"
+                        99
+
+                        > "100" + 1
+                        "1001"
+                        > "100" - 1
+                        99
+
+                        > "Hello" + 100
+                        "Hello100"
+                        > "Hello" - 100
+                        NaN
+                        ```
+
+                        Use the `parseInt`/`parseFloat` functions when dealing with strings and numbers
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## `==` vs `===`
+
+                            '' == '0'           // false
+                            0 == ''             // true
+                            0 == '0'            // true
+
+                            false == 'false'    // false
+                            false == '0'        // true
+
+                            false == undefined  // false
+                            false == null       // false
+                            null == undefined   // true
+
+                            ' \t\r\n ' == 0     // true
+
+                        These are all `false` with `===`
+                        </script>
+                    </section>
+                </section>
+
+                <!-- functions -->
+                <section>
+<!--                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions
+
+                            function add(a, b) {
+                                return a + b;
+                            }
+                            add(2, 40);     // 42
+                        </script>
+                    </section>
+ -->
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions
+
+                        ```
+                        function hello(name) {
+                            if(name === "Lebowski") {
+                                return "Hey dude!";
+                            } else {
+                                return "Hello sir.";
+                            }
+                        }
+                        ```
+
+                        ```language-javascript
+                        > hello("Lebowski")
+                        "Hey dude!"
+                        ```
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            var variable = "top-level";
+
+                            function printVariable() {
+                              console.log("in printVariable: " + variable);
+                            }
+
+                            function test() {
+                              variable = "test";
+                              console.log("in test:" + variable);
+                              printVariable();
+                            }
+
+                            test();
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            var variable = "top-level";
+
+                            function printVariable() {
+                              console.log("in printVariable: " + variable);
+                            }
+
+                            function test() {
+                              var variable = "test";
+                              console.log("in test:" + variable);
+                              printVariable();
+                            }
+
+                            test();
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            var variable = "top-level";
+
+                            function parentFunction() {
+                              var variable = "local";
+                              function childFunction() {
+                                console.log(variable);
+                              }
+                              childFunction();
+                            }
+                            parentFunction();
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            function run() {
+                                var something = 1;
+
+                                if (true) {
+                                  var something = 2;
+                                  console.log("Inside: " + something);
+                                }
+
+                                console.log("Outside: " + something);
+                            }
+                            run();
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                        ES6 to the rescue!
+
+                            function run() {
+                                let something = 1;
+
+                                if (true) {
+                                  let something = 2;
+                                  console.log("Inside: " + something);
+                                }
+
+                                console.log("Outside: " + something);
+                            }
+                            run();
+                        </script>
+                    </section>
+
+<!--                     <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            var variable = "top-level";
+
+                            function parentFunction() {
+                              var variable = "local";
+                              function childFunction() {
+                                console.log(variable);
+                              }
+                              childFunction();
+                            }
+                            parentFunction();
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            var variable = "top-level";
+
+                            function parentFunction() {
+                                var variable = "local";
+                                function childFunction() {
+                                    console.log(variable);
+                                }
+                                return childFunction;
+                            }
+                            var child = parentFunction();
+                            child();
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            function makeAddFunction(amount) {
+                                function add(number) {
+                                    return number + amount;
+                                }
+                                return add;
+                            }
+
+                            var addTwo = makeAddFunction(2);
+                            var addFive = makeAddFunction(5);
+                            console.log(addTwo(1) + addFive(1));
+                        </script>
+                    </section>
+ -->
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Higher-Order
+
+                        ```
+                        function add(a) {
+                            return function(b) {
+                                return a + b;
+                            };
+                        }
+                        var add2 = add(2);
+                        add2(10); // 12
+                        add2(20); // 22
+                        ```
+
+                        ```
+                        -- Haskell
+
+                        add a b = a + b
+                        add = \a -> \b -> a + b
+
+                        add2 = add 2
+                        add2 10
+                        add2 20
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### ES6 Arrow Functions
+
+                        Cleaning up notation:
+
+                        ```
+                        var f = function(arg1, arg2) {
+                            return arg1 + arg2;
+                        };
+
+                        // using ES6 becomes:
+                        var f = (arg1, arg2) => arg1 + arg2
+                        ```
+
+                        ```
+                        -- compare with Haskell
+                        f = \ arg1 arg2 -> arg1 + arg2
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Higher-Order
+
+                        ```
+                        var add = (a) => (b) => a + b
+                        var add2 = add(2);
+                        add2(10); // 12
+                        add2(20); // 22
+                        ```
+
+                        ```
+                        -- compare with Haskell
+                        add = \a -> \b -> a + b
+                        ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Map
+
+                        ```language-javascript
+                        function map(f, list) {
+                            if(list.length == 0) {
+                                return [];
+                            }
+                            return [f(list[0])].concat(map(f, list.slice(1)));
+                        }
+                        ```
+
+                        ```language-javascript
+                        > map((val) => val * 2, [1,2,3]);
+                        [2, 4, 6]
+                        ```
+
+                        ```
+                        --- compare with Haskell
+                        map f []     = []
+                        map f (x:xs) = f x : map f xs
+                        ```
+
+                        ```
+                        > map (\val -> val * 2) [1, 2, 3]
+                        [2, 4, 6]
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Mutation
+                        ```
+                        function mkCounter() {
+                            var count = 0;
+                            return () => ++count
+                        }
+                        ```
+
+                        ```
+                        > var counter = mkCounter();
+                        > counter();
+                        1
+                        > counter();
+                        2
+                        > counter();
+                        3
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Mutation
+
+                        ```
+                        function mkCounter() {
+                            var count = 0;
+                            return () => ++count
+                        }
+                        ```
+
+                        ```
+                        mkCounter = let count = 0 in
+                                        \_ -> count = count + 1 -- WRONG!
+                        ```
+                        </script>
+                    </section>
+
+
+                </section>
+
+                <!-- data structures -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Objects
+
+                        ```language-javascript
+                        var cat = {
+                            color: "grey",
+                            name: "Spot",
+                            size: 46
+                        };
+                        ```
+
+                        ```language-javascript
+                        cat.size = 47;
+                        cat["col" + "or"] = "orange";
+                        cat.age = 3;
+                        delete cat.color;
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Objects
+
+                        ```
+                        var cat = {
+                            color: "grey",
+                            name: "Spot",
+                            size: 46,
+
+                            canHaz: function(haz) {
+                                return this.name + " can haz " + haz;
+                            }
+                        };
+                        ```
+
+                        ```language-javascript
+                        > cat.canHaz("Cheezburger");
+                        "Spot can haz Cheezburger"
+                        ```
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        Two cats!
+
+                        ```
+                        var spot = {
+                            color: "grey",
+                            name: "Spot",
+
+                            canHaz: function(haz) {
+                                return this.name + " can haz " + haz;
+                            }
+                        };
+                        var frank = {
+                            color: "orange",
+                            name: "Frank",
+
+                            canHaz: function(haz)  {
+                                return this.name + " can haz " + haz;
+                            }
+                        };
+
+                        ```
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        function Cat(name, color) {
+                            this.name = name;
+                            this.color = color;
+
+                            this.canHaz = function(haz) {
+                                return this.name + " can haz " + haz;
+                            };
+                        }
+                        ```
+
+                        ```
+                        > var spot = new Cat("Spot", "grey");
+                        > var frank = new Cat("Frank", "orange");
+
+                        > spot.canHaz("Cheezburger");
+                        "Spot can haz Cheezburger"
+
+                        > frank.canHaz("Grammar");
+                        "Frank can haz Grammar"
+                        ```
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        function Cat(name, color) {
+                            this.name = name;
+                            this.color = color;
+                        }
+                        Cat.prototype.canHaz = function(haz) {
+                            return this.name + " can haz " + haz;
+                        };
+                        ```
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        function Cat(name, color) {
+                            this.name = name;
+                            this.color = color;
+                        }
+
+                        function Dog(name, likesFrisbee) {
+                            this.name = name;
+                            this.likesFrisbee = likesFrisbee;
+                        }
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        var CanHazable = {
+                            canHaz: function(haz) {
+                                return this.name + " can haz " + haz;
+                            }
+                        };
+                        function Cat(name, color) { ... }
+                        function Dog(name, likesFrisbee) { ... }
+                        Cat.prototype = CanHazable;
+                        Dog.prototype = CanHazable;
+                        ```
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        data Cat = Cat { cname :: String
+                                       , color :: String
+                                       }
+
+                        data Dog = Dog { dname :: String
+                                       , likesFrisbee :: Bool
+                                       }
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        class CanHazable a where
+                              canHaz :: a -> String -> String
+
+                        instance CanHazable Cat where
+                             canHaz c haz = "The cat "
+                                            ++ (cname c)
+                                            ++ " can haz "
+                                            ++ haz
+
+                        instance CanHazable Dog where
+                             canHaz d haz = "The dog "
+                                            ++ (dname d)
+                                            ++ " can haz "
+                                            ++ haz
+                        ```
+
+                        ```
+                        > let spot = Cat "Spot" "orange"
+                        > canHaz spot "Cheezburger"
+                        "The cat Spot can haz Cheezburger"
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        var spot = new Cat("spot", "grey");
+                        var frank = new Cat("frank", "orange");
+
+                        Cat.prototype.lolz = function(noun, verb, relatedNoun) {
+                            return "Im in ur "
+                            + noun + ", "
+                            + verb + "ing ur "
+                            + relatedNoun;
+                        };
+                        ```
+
+                        ```language-javascript
+                        > spot.lolz("code", "monkey patch", "objectz");
+                        "I'm in ur code, monkey patching ur objectz"
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <img src="lolcat.jpg" />
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Objects
+
+                        ```
+                        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 8, 10];
+
+                        Array.prototype.head = function() {
+                            return this[0];
+                        };
+                        Array.prototype.tail = function() {
+                            return this.slice(1);
+                        };
+
+                        ```
+
+                        ```
+                        > arr.head();
+                        1
+                        > arr.tail();
+                        [2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        ```
+                        </script>
+                    </section>
+
+
+<!--                     <section data-markdown>
+                        <script type="text/template">
+                        ## Arrays
+
+                            var grades = [99, 100, 89, 95];
+                            console.log(grades[1]);     // 100
+                            console.log(grades.length); // 4
+                            grades[1000] = 70;
+                            console.log(grades.length); // 1001
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Arrays - Just objects
+
+                            var grades = {
+                                0: 99,
+                                1: 100,
+                                2: 89,
+                                3: 95
+                            };
+                        </script>
+                    </section>
+ -->
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Modules
+
+                        ```
+                        var M = (function() {
+                            var privateName = 42
+
+                            return {
+                                publicName: "public!",
+
+                                foo: function(toadd) {
+                                    return privateName + toadd;
+                                }
+                            };
+                        }());
+                        ```
+
+                        ```language-javascript
+                        > M.publicName
+                        "public!"
+                        > M.privateName
+                        undefined
+                        > M.foo(5);
+                        47
+                        ```
+                        </script>
+                    </section>
+                </section>
+
+<!--                 <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Classes
+
+                        ```
+                        function Cat(name, color) {
+                            this.name = name;
+                            this.color = color;
+                        }
+                        function Dog(name, frisbee) {
+                            this.name = name;
+                            this.frisbee = frisbee;
+                        }
+                        var Animal = {
+                            canHaz: function(haz) {
+                                return this.name + " can haz " + haz;
+                            }
+                        };
+                        Cat.prototype = Animal;
+                        Dog.prototype = Animal;
+                        ```
+
+                        ```
+                        > var c = Cat("spot", "red");
+                        > c
+                        undefined
+                        > name
+                        "spot"
+                        > color
+                        "red"
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Classes
+
+                        ```
+                        class Animal
+                            canHaz: (haz) ->
+                                @name + " can haz " + haz
+
+                        class Cat extends Animal
+                            construct: (name, color) ->
+                                @name = name
+                                @color = color
+
+                        class Dog extends Animal
+                            construct: (@name, @color) ->
+
+                        d = new Dog("fido", false)
+                        d.canHaz("advice")
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Classes
+
+                        ```
+                        var Animal = {
+                            canHaz: function(haz) {
+                                return this.name + " can haz " + haz;
+                            }
+                        };
+
+                        var Cat = Animal.extend({
+                            construct: function(name, color) {
+                                this.name = name;
+                                this.color = color;
+                            },
+
+                            meow: function() {
+                                return "Meow!!";
+                            }
+                        });
+                        ```
+                        ```
+                        var Dog = Animal.extend({
+                            construct: function (name, frisbee) {
+                                this.name = name;
+                                this.frisbee = frisbee;
+                            },
+
+                            bark: function () {
+                                return "Arf!";
+                            }
+
+                        });
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Classes
+
+                        ```
+                        > var d = Dog.create("fido", false);
+                        > d.canHaz("bone");
+                        "fido can haz bone"
+                        > d.bark();
+                        "Arf!"
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Classes
+
+                        ```
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Classes
+
+                        ```
+                        ```
+                        </script>
+                    </section>
+                </section>
+ -->
+
+<!--                 <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Monads
+
+                        ```
+                         function MONAD() {
+                            return function unit(value) {
+                                var monad = Object.create(null);
+                                monad.bind = function(func) {
+                                    return func(value);
+                                };
+                                return monad;
+                            };
+                        }
+                        ```
+
+                        ```
+                        > var id = MONAD();
+                        > var monad = id("Hello, world");
+                        > monad.bind(console.log);
+                        "Hello, world"
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Monads
+
+                        ```
+                         function MONAD() {
+                            var prototype = Object.create(null);
+                            function unit(value) {
+                                var monad = Object.create(prototype);
+                                monad.bind = function(func, args) {
+                                    return func(value, ...args);
+                                };
+                                return monad;
+                            };
+                            unit.lift = function(name, func) {
+                                prototype[name] = function(...args) {
+                                    return unit(this.bind(func, args));
+                                };
+                                return unit;
+                            };
+                            return unit;
+                        }
+                        ```
+
+                        ```
+                        var ajax = Monad()
+                                .lift('alert', alert);
+
+                        var monad = ajax("hello, world");
+                        monad.alert;
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Monads
+
+                        ```
+                         function MONAD() {
+                            var prototype = Object.create(null);
+                            function unit(value) {
+                                var monad = Object.create(prototype);
+                                monad.bind = function(func, args) {
+                                    return func(value, ...args);
+                                };
+                                if (typeof modifier === 'function') {
+                                    modifier(monad, value);
+                                }
+                                return monad;
+                            };
+                            return unit;
+                        }
+                        ```
+
+                        ```
+                            unit.lift = function(name, func) {
+                                prototype[name] = function(...args) {
+                                    return unit(this.bind(func, args));
+                                };
+                                return unit;
+                            };
+
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Monads
+
+                        ```
+                         var maybe = MONAD(function(monad, value) {
+                            if(value == null) {
+                                monad.is_null = true;
+                                monad.bind = function() {
+                                    return monad;
+                                };
+                            }
+                        });
+
+                        var monad = maybe(null);
+                        monad.bind(alert); // nothing happens
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Monads
+
+                        ```
+                        ```
+                        </script>
+                    </section>
+
+                </section>
+ -->
+                <!-- wrap up -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Resources
+
+                        * [MDN](https://developer.mozilla.org/en-US/)
+                        * [Web Platform Docs](http://www.webplatform.org/)
+                        * [Eloquent JavaScript (online book)](http://eloquentjavascript.net/contents.html)
+                        * [JavaScript: The Good Parts (book)](http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742)
+                        * [Effective JavaScript (book)](http://www.amazon.com/Effective-JavaScript-Specific-Software-Development/dp/0321812182/ref=sr_1_1?ie=UTF8&qid=1360644162&sr=8-1&keywords=effective+javascript)
+
+                        </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Resources
+
+                        * [Bananabread](https://developer.cdn.mozilla.net/media/uploads/demos/a/z/azakai/3baf4ad7e600cbda06ec46efec5ec3b8/bananabread_1348775105_demo_package/index.html)
+                        * [emscripten](https://github.com/kripken/emscripten/wiki)
+                        * [CoffeeScript](http://coffeescript.org/)
+                        * [altJS](http://altjs.org/)
+                        * [sweet.js](http://sweetjs.org/)
+                        * [jQuery](http://jquery.com/)
+                        * [node.js](http://nodejs.org/)
+                        * [ember](http://emberjs.com/)
+                        * [AngularJS](http://angularjs.org/)
+                        * [Backbone.js](http://backbonejs.org/)
+
+                        </script>
+                    </section>
+
+<!--                     <section data-markdown>
+                        <script type="text/template">
+                        ## Resources - Libraries
+
+                        * [jQuery (DOM manipulation)](http://jquery.com/)
+                        * [Node.js (server side JS)](http://nodejs.org/)
+                        * [jster (collection of libraries)](http://jster.net/)
+
+                        </script>
+                    </section>
+ -->
+                </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="jquery-1.8.2.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+
+    </body>
+</html>
