@@ -1,6 +1,6 @@
 ---
-layout:post
-title: Hygiene in sweet.js
+title: Hygiene in sweetjs
+layout: post
 ---
 
 The most important feature of [sweet.js](http://sweetjs.org) is hygiene. Hygiene prevents variables names inside of macros from clashing with variables in the surrounding code. It's what gives macros the power to actually be syntactic abstractions by hiding implementation details and allowing you to use a hygienic macro *anywhere* in your code.
