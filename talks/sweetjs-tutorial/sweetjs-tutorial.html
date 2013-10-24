@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>(Sweet.js)</title>
+<meta name="author" content="(Tim Disney)"/>
+<link rel="stylesheet" href="./reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="./reveal.js/css/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/css/print/pdf.css" type="text/css" media="print"/>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="escodegen.js"></script><link rel="stylesheet" href="main.css"><script src="jquery.js"></script><script data-main="editor" src="require.js"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section>
+<h1>Sweet.js</h1>
+<h2>Tim Disney</h2>
+<h2><a href="mailto:tim@disnet.me">tim@disnet.me</a></h2>
+<h2></h2></section>
+
+
+
+<section>
+<section id="sec-1" >
+
+<h2>Adding class to JavaScript</h2>
+<br />
+
+<p>
+Syntax for defining a class in JS:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #728a05;">function</span> <span style="color: #2075c7;">Person</span>(<span style="color: #2075c7;">name</span>) {
+    <span style="color: #259185;">this</span>.name = name;
+}
+Person.<span style="color: #259185;">prototype</span>.say = <span style="color: #728a05;">function</span>(<span style="color: #2075c7;">msg</span>) {
+    console.log(<span style="color: #259185;">this</span>.name + <span style="color: #259185;">" says: "</span> + msg);
+} 
+
+<span style="color: #728a05;">var</span> <span style="color: #2075c7;">tim</span> = <span style="color: #728a05;">new</span> <span style="color: #a57705;">Person</span>(<span style="color: #259185;">"Tim"</span>);
+tim.say(<span style="color: #259185;">"I love JavaScript!"</span>);
+</pre>
+</div>
+
+</section>
+<section id="sec-1-1" >
+
+<h3>Adding class to JavaScript</h3>
+<br />
+
+<p>
+WANT!
+</p>
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #728a05;">class</span> Person {
+    constructor(name) {
+        <span style="color: #259185;">this</span>.name = name;
+    }
+
+    say(msg) {
+        console.log(<span style="color: #259185;">this</span>.name + <span style="color: #259185;">" says: "</span> + msg);
+    }
+}
+
+<span style="color: #728a05;">var</span> <span style="color: #2075c7;">tim</span> = <span style="color: #728a05;">new</span> <span style="color: #a57705;">Person</span>(<span style="color: #259185;">"Tim"</span>);
+tim.say(<span style="color: #259185;">"I love JavaScript!"</span>);
+</pre>
+</div>
+
+<ul class="org-ul">
+<li class="fragment roll-in">coming in the next version of JS (ES6)
+</li>
+<li class="fragment roll-in">but I want it now!
+</li>
+</ul>
+</section>
+<section id="sec-1-2" >
+
+<h3>Sweet.js</h3>
+<br />
+
+<p>
+A hygienic macro system for JavaScript
+</p>
+
+<br />
+
+<ul class="org-ul">
+<li class="fragment roll-in">compiles macros+JS to pure JS
+</li>
+<li class="fragment roll-in">add new syntax to JavaScript
+</li>
+<li class="fragment roll-in">build expressive domain specific languages
+</li>
+<li class="fragment roll-in">build robust macros with hygiene
+</li>
+</ul>
+</section>
+<section id="sec-1-3" >
+
+<h3>Macros in other Languages</h3>
+<br />
+
+<p>
+C/C++ has relatively primitive macros:
+</p>
+<ul class="org-ul">
+<li>limited pattern matching
+</li>
+<li>no hygiene
+</li>
+<li>expression-based language
+</li>
+</ul>
+
+<p>
+Scheme has a much richer macro system:
+</p>
+<ul class="org-ul">
+<li>robust pattern matching
+</li>
+<li>hygienic
+</li>
+<li>language is fully delimited
+</li>
+</ul>
+
+</section>
+<section id="sec-1-4" >
+
+<h3>Macros in other Language</h3>
+<br />
+
+<p>
+C/C++ macros:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #bd3612;">#define</span> <span style="color: #2075c7;">PI</span> 3.14159
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #bd3612;">#define</span> <span style="color: #2075c7;">swap</span>(<span style="color: #2075c7;">x</span>,<span style="color: #2075c7;">y</span>) {<span style="color: #a57705;">int</span> <span style="color: #2075c7;">tmp</span>=(x); \
+    (x) = (y); \
+    (y) = tmp;}
+</pre>
+</div>
+
+<p>
+Scheme macros:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-scheme"><span style="color: #7f7f7f;">(</span>define-syntax-rule <span style="color: #7f7f7f;">(</span>swap x y<span style="color: #7f7f7f;">)</span>
+  <span style="color: #7f7f7f;">(</span><span style="color: #728a05;">let</span> <span style="color: #7f7f7f;">(</span>[tmp x]<span style="color: #7f7f7f;">)</span>
+    <span style="color: #7f7f7f;">(</span>set! x y<span style="color: #7f7f7f;">)</span>
+    <span style="color: #7f7f7f;">(</span>set! y tmp<span style="color: #7f7f7f;">)))</span>
+</pre>
+</div>
+</section>
+<section id="sec-1-5" >
+
+<h3>Sweet.js Macros</h3>
+<br />
+
+<p>
+Sweet.js takes design cues from Scheme:
+</p>
+<ul class="org-ul">
+<li>robust pattern matching
+</li>
+<li>hygienic
+</li>
+<li>expression-based language
+</li>
+</ul>
+</section>
+</section>
+<section>
+<section id="sec-2" >
+
+<h2>Macros Rule</h2>
+<br />
+
+<p>
+Match a pattern then generate a template
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript">macro &lt;name&gt; {
+    rule { &lt;pattern&gt; } =&gt; { &lt;template&gt; }
+}
+</pre>
+</div>
+
+</section>
+<section id="sec-2-1" >
+
+<h3>whoami</h3>
+<p>
+Identity Macro:
+</p>
+
+<pre class="example">
+macro id {
+    rule { $x } =&gt; { $x }
+}
+
+id 42
+</pre>
+</section>
+<section id="sec-2-2" >
+
+<h3>Repetition</h3>
+<p>
+Ellipses <code>...</code> are used to repeat syntax
+</p>
+<pre class="example">
+macro def {
+  rule { 
+
+    $name ( $params (,) ... ) 
+          { $body ... } 
+
+  } =&gt; {
+
+    function $name($params (,) ...)
+                  { $body ... }
+
+  }
+}
+
+def add (a, b) {
+    return a + b;
+}
+</pre>
+</section>
+<section id="sec-2-3" >
+
+<h3>Match</h3>
+<p>
+<code>$()</code> will group multiple tokens to repeat
+</p>
+
+<p>
+<code>:expr</code> will use the parser to match a JS expression
+</p>
+
+<pre class="example">
+macro let {
+  rule {
+
+    $($ident = $val:expr) (,) ...
+
+  } =&gt; {
+
+    var $( $ident = $val ) (,) ...
+
+  }
+}
+
+let x = 10 / 100, z = 100
+</pre>
+
+</section>
+<section id="sec-2-4" >
+
+<h3>Class</h3>
+<pre class="example">
+macro class {
+  rule {
+
+    $className {
+
+      constructor ($cparams ...)
+                  {$cbody ...}
+
+      $(
+        $mname ($mparams ...)
+               {$mbody ...}
+       ) ...
+    }
+
+  } =&gt; {
+
+    function $className
+             ($cparams ...)
+             {$cbody ...}
+
+    $(
+      $className.prototype.$mname = 
+      function $mname ($mparams ...)
+                      {$mbody ...};
+     ) ...
+  }
+}
+
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    say(msg) {
+        console.log(this.name +
+                    " says: " +
+                    msg);
+    }
+}
+</pre>
+
+</section>
+<section id="sec-2-5" >
+
+<h3>Multiple Rules</h3>
+<pre class="example">
+macro nest {
+  rule { () } =&gt; {}
+
+  rule { ($head $rest ...) } =&gt; {
+    [$head , nest ($rest ...)]
+  }
+}
+
+nest (1 2 3 4)
+</pre>
+</section>
+
+</section>
+<section>
+<section id="sec-3" >
+
+<h2>Compilers 101</h2>
+<img src="images/compilers101_1.png"/>
+
+</section>
+<section id="sec-3-1" >
+
+<h3>Compilers 101</h3>
+<img src="images/compilers101_2.png"/>
+</section>
+<section id="sec-3-2" >
+
+<h3>Compilers 101</h3>
+<img src="images/compilers101_3.png"/>
+</section>
+<section id="sec-3-3" >
+
+<h3>Compilers 101</h3>
+<img src="images/compilers101_4.png"/>
+</section>
+<section id="sec-3-4" >
+
+<h3>Compilers 101</h3>
+<img src="images/compilers101_5.png"/>
+</section>
+<section id="sec-3-5" >
+
+<h3>Compilers 101</h3>
+<img src="images/compilers101_6.png"/>
+</section>
+<section id="sec-3-6" >
+
+<h3>Reading</h3>
+<p>
+<code>read</code> to add structure!
+</p>
+<img src="images/compilers_macros_1.png"/>
+</section>
+<section id="sec-3-7" >
+
+<h3>Reading</h3>
+<img src="images/compilers_macros_2.png"/>
+
+<ul class="org-ul">
+<li><code>read</code> matches delimiters
+</li>
+<li>this allows macros to manipulate delimiter matched syntax
+</li>
+</ul>
+</section>
+</section>
+<section>
+<section id="sec-4" >
+
+<h2>Keeping it Clean</h2>
+<br />
+
+<p>
+Hygiene is the <b>most</b> important feature&#x2026;if somewhat difficult to completely grok
+</p>
+
+<ul class="org-ul">
+<li class="fragment roll-in">protects abstractions
+</li>
+<li class="fragment roll-in">allows independently created macros to work together
+</li>
+<li class="fragment roll-in">allows users of macros to not reason about implementation
+</li>
+</ul>
+
+
+</section>
+<section id="sec-4-1" >
+
+<h3>Hygiene in two parts</h3>
+<br />
+
+
+<ul class="org-ul">
+<li class="fragment roll-in">hygiene renames variables to prevent name clashes
+</li>
+<li class="fragment roll-in">two kinds of clashes to protect against
+<ul class="org-ul">
+<li>binding clashes
+</li>
+<li>reference clashes
+</li>
+</ul>
+</li>
+</ul>
+
+</section>
+<section id="sec-4-2" >
+
+<h3>Hygiene Part 1 (binding)</h3>
+<br />
+
+
+<ul class="org-ul">
+<li class="fragment roll-in">macros can create variable bindings
+<ul class="org-ul">
+<li><code>var x = ...</code>
+</li>
+</ul>
+</li>
+<li class="fragment roll-in">need to make sure the name does not clash with other bindings in the
+surrounding code
+</li>
+</ul>
+</section>
+<section id="sec-4-3" >
+
+<h3>Hygiene Part 1 (binding)</h3>
+<pre class="example">
+macro swap {
+  rule { ($a, $b) } =&gt; {
+    var tmp = $a;
+    $a = $b;
+    $b = tmp;
+  }
+}
+var a = 10;
+var b = 20;
+swap (a, b)
+
+/*
+var tmp = 10;
+var b = 20;
+swap (tmp, b)
+*/
+</pre>
+</section>
+<section id="sec-4-4" >
+
+<h3>Hygiene Part 1 (binding)</h3>
+<br />
+
+<p>
+This part of hygiene means:
+</p>
+
+<ul class="org-ul">
+<li>users of <code>swap</code> don't have to reason about the implementation
+</li>
+<li>the creator of <code>swap</code> doesn't have to think about the bindings it creates
+</li>
+</ul>
+
+</section>
+<section id="sec-4-5" >
+
+<h3>Hygiene Part 2 (reference)</h3>
+<br />
+
+<p>
+Though less obvious, references also must be protected:
+</p>
+
+
+<ul class="org-ul">
+<li>functions/variables referenced in the macro definition
+</li>
+<li>without hygiene, could be shadowed by calling scope
+</li>
+<li>requires whole program analysis to implement
+</li>
+</ul>
+
+</section>
+<section id="sec-4-6" >
+
+<h3>Hygiene Part 2 (reference)</h3>
+<pre class="example">
+var random = function(seed) {
+  // super random!
+  return 42;
+}
+
+macro m {
+  rule {()} =&gt; {
+    var n = random(42);
+    // ...
+  }
+}
+
+
+function foo() {
+  var random = 42;
+  m ()
+}
+</pre>
+</section>
+</section>
+<section>
+<section id="sec-5" >
+
+<h2>Case Macros</h2>
+<br />
+<p>
+Slightly different form from rule macros:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript">macro &lt;name&gt; {
+    <span style="color: #728a05;">case</span> { &lt;pattern&gt; } =&gt; { &lt;body&gt; }
+}
+</pre>
+</div>
+
+<p>
+<code>&lt;body&gt;</code> is now JavaScript code that is evaluated when the macro gets
+invoked
+</p>
+
+</section>
+<section id="sec-5-1" >
+
+<h3>Case Macros</h3>
+<p>
+Templates are created with <code>#{}</code>
+</p>
+
+<p>
+So the identity macro is now:
+</p>
+
+<pre class="example">
+macro id {
+  case {_ $x } =&gt; {
+    return #{ $x }
+  }
+}
+
+id 42
+</pre>
+</section>
+<section id="sec-5-2" >
+
+<h3>Case Macros</h3>
+<p>
+Functions are provided to create new syntax 
+</p>
+
+<pre class="example">
+macro m {
+  case {_ () } =&gt; {
+    return [makeValue(42, #{here})]
+  }
+}
+m ()
+</pre>
+</section>
+<section id="sec-5-3" >
+
+<h3>Case Macros</h3>
+<br />
+
+<p>
+Provided functions for syntax creation:
+</p>
+
+<ul class="org-ul">
+<li class="fragment roll-in"><code>makeValue</code> - booleans, numbers, strings
+</li>
+<li class="fragment roll-in"><code>makeIdent</code> - identifiers
+</li>
+<li class="fragment roll-in"><code>makeRegex</code> - regexps
+</li>
+<li class="fragment roll-in"><code>makePunc</code> - "Punctuators" (ie <code>+</code>, <code>-</code>, <code>/</code>, etc.)
+</li>
+<li class="fragment roll-in"><code>makeDelim</code> - <code>{}</code>, <code>[]</code>, <code>()</code>
+</li>
+</ul>
+</section>
+<section id="sec-5-4" >
+
+<h3>Case Macros</h3>
+<img src="images/lexical_context_1.png" />
+</section>
+<section id="sec-5-5" >
+
+<h3>Case Macros</h3>
+<img src="images/lexical_context_2.png" />
+</section>
+<section id="sec-5-6" >
+
+<h3>Case Macros</h3>
+<img src="images/lexical_context_3.png" />
+</section>
+<section id="sec-5-7" >
+
+<h3>Case Macros</h3>
+<img src="images/lexical_context_4.png" />
+</section>
+<section id="sec-5-8" >
+
+<h3>Case Macros</h3>
+<img src="images/lexical_context_5.png" />
+
+</section>
+<section id="sec-5-9" >
+
+<h3>Case Macros</h3>
+<p>
+Lexical Context
+</p>
+
+<pre class="example">
+var temp = "top level"
+macro m {
+  case {$name () } =&gt; {
+
+    var temp1 = makeIdent("temp",
+                          #{here});
+
+    var temp2 = makeIdent("temp",
+                          #{$name})
+
+    return [temp1,
+            makePunc("+", #{here}),
+            temp2];
+  }
+}
+
+function foo() {
+  var temp = "inner";
+  m ()
+}
+</pre>
+
+</section>
+<section id="sec-5-10" >
+
+<h3>Case Macros</h3>
+<p>
+Use <code>withSyntax</code> to mix templates and syntax creation
+</p>
+
+<pre class="example">
+macro m {
+  case {_ $x } =&gt; {
+
+    var y = makeValue(2, #{here});
+
+    return withSyntax($y = [y]) {
+      return #{$x + $y}
+    }
+  }
+}
+m 1
+</pre>
+</section>
+<section id="sec-5-11" >
+
+<h3>Let Bound Macros</h3>
+<p>
+Prevents the macro from being bound in the body
+</p>
+
+<pre class="example">
+let function = macro {
+  case {_
+    $name $params { $body ... }
+  } =&gt; {
+    return #{
+      function $name $params {
+        console.log("called...");
+        $body ...
+      }
+    }
+  }
+} 
+
+function foo () {
+  return 2+2;
+}
+</pre>
+
+<p>
+Infinite loop if we use <code>macro function { ... }</code>
+</p>
+</section>
+</section>
+<section>
+<section id="sec-6" >
+
+<h2>Putting it all together</h2>
+<br />
+<p>
+Let's make <code>if</code> anaphoric:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #a57705;">long</span>.obj.path = [1, 2, 3];
+<span style="color: #728a05;">if</span> (<span style="color: #a57705;">long</span>.obj.path) {
+    console.log(it);
+}
+<span style="color: #465a61; font-style: italic;">// </span><span style="color: #465a61; font-style: italic;">logs: [1, 2, 3]</span>
+</pre>
+</div>
+
+<p>
+This is unhygienic!
+(but kinda cool&#x2026;)
+</p>
+
+</section>
+<section id="sec-6-1" >
+
+<h3>Anaphoric if</h3>
+<pre class="example">
+let if = macro {
+  case {
+    $if ($cond ...) {$body ...}
+  } =&gt; {
+
+    var it = makeIdent("it", #{$if})
+
+    return withSyntax($it = [it]) {
+      return #{ 
+        var $it = $cond ...
+        if ($it) {
+          $body ...
+        }
+      }
+    }
+  }
+}
+var long = {obj: {path: [1, 2, 3]}}
+if (long.obj.path) {
+  console.log(it)
+}
+</pre>
+</section>
+</section>
+<section>
+<section id="sec-7" >
+
+<h2>Future Work</h2>
+<ul class="org-ul">
+<li>Sourcemaps
+</li>
+<li>Improve error messages
+</li>
+<li>Prove read is correct
+</li>
+<li>Integration with modules
+</li>
+</ul>
+
+</section>
+<section id="sec-7-1" >
+
+<h3>Get it</h3>
+<p>
+<a href="http://sweetjs.org/">http://sweetjs.org/</a>
+</p>
+
+<p>
+<a href="https://github.com/mozilla/sweet.js">https://github.com/mozilla/sweet.js</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">&gt; npm install -g sweet.js
+</pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/lib/js/head.min.js"></script>
+<script src="./reveal.js/js/reveal.min.js"></script>
+<script>
+
+        		// Full list of configuration options available here:
+        		// https://github.com/hakimel/reveal.js#configuration
+        		Reveal.initialize({
+        			controls: true,
+        			progress: true,
+        			history: true,
+        			center: true,
+        			rollingLinks: false,
+        			keyboard: true,
+        			overview: true,
+        			 // slide width
+        			 // slide height
+        			 // slide margin
+        			 // slide minimum scaling factor
+        			 // slide maximum scaling factor
+
+
+        			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        			transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+        			transitionSpeed: 'default',
+
+        			// Optional libraries used to extend on reveal.js
+        			dependencies: [
+        				{ src: './reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } }
+        				,{ src: './reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: './reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        				,{ src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+        				,{ src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+         				
+        			]
+        		});
+</script>
+</body>
+</html>

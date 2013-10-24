@@ -1,0 +1,612 @@
+#+Title: Sweet.js
+#+Author: Tim Disney
+#+Email: tim@disnet.me
+
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:nil 
+#+OPTIONS: toc:nil reveal_keyboard:t reveal_overview:t num:nil
+#+REVEAL_TRANS: none
+#+REVEAL_ROOT: ./reveal.js
+#+REVEAL_THEME: simple
+#+REVEAL_HEAD_PREAMBLE: <script src="escodegen.js"></script><link rel="stylesheet" href="main.css"><script src="jquery.js"></script><script data-main="editor" src="require.js"></script>
+
+
+
+* Adding class to JavaScript
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+Syntax for defining a class in JS:
+
+#+BEGIN_SRC javascript
+  function Person(name) {
+      this.name = name;
+  }
+  Person.prototype.say = function(msg) {
+      console.log(this.name + " says: " + msg);
+  } 
+  
+  var tim = new Person("Tim");
+  tim.say("I love JavaScript!");
+#+END_SRC
+
+** Adding class to JavaScript
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+WANT!
+#+BEGIN_SRC javascript
+  class Person {
+      constructor(name) {
+          this.name = name;
+      }
+  
+      say(msg) {
+          console.log(this.name + " says: " + msg);
+      }
+  }
+  
+  var tim = new Person("Tim");
+  tim.say("I love JavaScript!");
+#+END_SRC
+
+#+ATTR_REVEAL: :frag roll-in
+- coming in the next version of JS (ES6)
+- but I want it now!
+
+** Sweet.js
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+A hygienic macro system for JavaScript
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+#+ATTR_REVEAL: :frag roll-in
+- compiles macros+JS to pure JS
+- add new syntax to JavaScript
+- build expressive domain specific languages
+- build robust macros with hygiene
+
+** Macros in other Languages
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+C/C++ has relatively primitive macros:
+- limited pattern matching
+- no hygiene
+- expression-based language
+
+Scheme has a much richer macro system:
+- robust pattern matching
+- hygienic
+- language is fully delimited
+
+  
+** Macros in other Language
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+C/C++ macros:
+#+BEGIN_SRC c
+  #define PI 3.14159
+#+END_SRC
+
+#+BEGIN_SRC c
+  #define swap(x,y) {int tmp=(x); \
+      (x) = (y); \
+      (y) = tmp;}
+#+END_SRC
+
+Scheme macros:
+#+BEGIN_SRC scheme
+  (define-syntax-rule (swap x y)
+    (let ([tmp x])
+      (set! x y)
+      (set! y tmp)))
+#+END_SRC
+
+** Sweet.js Macros
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+Sweet.js takes design cues from Scheme:
+- robust pattern matching
+- hygienic
+- expression-based language
+
+* Macros Rule
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+Match a pattern then generate a template
+
+#+BEGIN_SRC javascript
+  macro <name> {
+      rule { <pattern> } => { <template> }
+  }
+#+END_SRC
+
+** whoami
+Identity Macro:
+
+#+BEGIN_EXAMPLE
+  macro id {
+      rule { $x } => { $x }
+  }
+
+  id 42
+#+END_EXAMPLE
+
+** Repetition
+
+Ellipses =...= are used to repeat syntax
+#+BEGIN_EXAMPLE
+   macro def {
+     rule { 
+
+       $name ( $params ... ) 
+             { $body ... } 
+
+     } => {
+
+       function $name ( $params ... )
+                      { $body ... }
+
+     }
+   }
+   
+   def add (a, b) {
+       return a + b;
+   }
+#+END_EXAMPLE
+
+** Match
+=$()= will group multiple tokens to repeat
+
+=:expr= will use the parser to match a JS expression
+
+#+BEGIN_EXAMPLE
+  macro let {
+    rule {
+  
+      $($ident = $val:expr) (,) ...
+  
+    } => {
+  
+      var $( $ident = $val ) (,) ...
+  
+    }
+  }
+  
+  let x = 10 / 100, z = 100
+#+END_EXAMPLE
+** Class
+
+#+BEGIN_EXAMPLE
+  macro class {
+    rule {
+  
+      $className {
+  
+        constructor ($cparams ...)
+                    {$cbody ...}
+  
+        $(
+          $mname ($mparams ...)
+                 {$mbody ...}
+         ) ...
+      }
+  
+    } => {
+  
+      function $className
+               ($cparams ...)
+               {$cbody ...}
+  
+      $(
+        $className.prototype.$mname = 
+        function $mname ($mparams ...)
+                        {$mbody ...};
+       ) ...
+    }
+  }
+  
+  class Person {
+      constructor(name) {
+          this.name = name;
+      }
+  
+      say(msg) {
+          console.log(this.name +
+                      " says: " +
+                      msg);
+      }
+  }
+#+END_EXAMPLE
+** Multiple Rules
+
+#+BEGIN_EXAMPLE
+  macro nest {
+    rule { () } => {}
+
+    rule { ($head $rest ...) } => {
+      [$head , nest ($rest ...)]
+    }
+  }
+  
+  nest (1 2 3 4)
+#+END_EXAMPLE
+* Compilers 101
+
+#+BEGIN_HTML
+<img src="images/compilers101_1.png"/>
+#+END_HTML
+
+** Compilers 101
+
+#+BEGIN_HTML
+<img src="images/compilers101_2.png"/>
+#+END_HTML
+
+** Compilers 101
+
+#+BEGIN_HTML
+<img src="images/compilers101_3.png"/>
+#+END_HTML
+
+** Compilers 101
+
+#+BEGIN_HTML
+<img src="images/compilers101_4.png"/>
+#+END_HTML
+
+** Compilers 101
+
+#+BEGIN_HTML
+<img src="images/compilers101_5.png"/>
+#+END_HTML
+
+** Compilers 101
+
+#+BEGIN_HTML
+<img src="images/compilers101_6.png"/>
+#+END_HTML
+
+** Reading
+
+=read= to add structure!
+#+BEGIN_HTML
+<img src="images/compilers_macros_1.png"/>
+#+END_HTML
+
+** Reading
+
+#+BEGIN_HTML
+<img src="images/compilers_macros_2.png"/>
+#+END_HTML
+
+- =read= matches delimiters
+- this allows macros to manipulate delimiter matched syntax
+
+* Keeping it Clean
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+Hygiene is the *most* important feature...if somewhat difficult to completely grok
+
+#+ATTR_REVEAL: :frag roll-in
+- protects abstractions
+- allows independently created macros to work together
+- allows users of macros to not reason about implementation
+
+
+** Hygiene in two parts
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+
+#+ATTR_REVEAL: :frag roll-in
+- hygiene renames variables to prevent name clashes
+- two kinds of clashes to protect against
+  - binding clashes
+  - reference clashes
+
+
+** Hygiene Part 1 (binding)
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+
+#+ATTR_REVEAL: :frag roll-in
+- macros can create variable bindings
+  - =var x = ...=
+- need to make sure the name does not clash with other bindings in the
+  surrounding code
+
+** Hygiene Part 1 (binding)
+
+#+BEGIN_EXAMPLE
+  macro swap {
+    rule { ($a, $b) } => {
+      var tmp = $a;
+      $a = $b;
+      $b = tmp;
+    }
+  }
+  var a = 10;
+  var b = 20;
+  swap (a, b)
+  
+  /*
+  var tmp = 10;
+  var b = 20;
+  swap (tmp, b)
+  */
+#+END_EXAMPLE
+
+** Hygiene Part 1 (binding)
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+This part of hygiene means:
+
+- users of =swap= don't have to reason about the implementation
+- the creator of =swap= doesn't have to think about the bindings it creates
+  
+
+** Hygiene Part 2 (reference)
+
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+Though less obvious, references also must be protected:
+
+
+- functions/variables referenced in the macro definition
+- without hygiene, could be shadowed by calling scope
+- requires whole program analysis to implement
+
+
+** Hygiene Part 2 (reference)
+
+#+BEGIN_EXAMPLE
+  var random = function(seed) {
+    // super random!
+    return 42;
+  }
+  
+  macro m {
+    rule {()} => {
+      var n = random(42);
+      // ...
+    }
+  }
+  
+  
+  function foo() {
+    var random = 42;
+    m ()
+  }
+#+END_EXAMPLE
+
+* Case Macros
+#+BEGIN_HTML
+<br />
+#+END_HTML
+Slightly different form from rule macros:
+
+#+BEGIN_SRC javascript
+  macro <name> {
+      case { <pattern> } => { <body> }
+  }
+#+END_SRC
+
+=<body>= is now JavaScript code that is evaluated when the macro gets
+invoked
+
+** Case Macros
+Templates are created with =#{}=
+
+So the identity macro is now:
+
+#+BEGIN_EXAMPLE
+  macro id {
+    case {_ $x } => {
+      return #{ $x }
+    }
+  }
+  
+  id 42
+#+END_EXAMPLE
+
+** Case Macros
+Functions are provided to create new syntax 
+      
+#+BEGIN_EXAMPLE
+  macro m {
+    case {_ () } => {
+      return [makeValue(42, #{here})]
+    }
+  }
+  m ()
+#+END_EXAMPLE
+
+** Case Macros
+#+BEGIN_HTML
+<br />
+#+END_HTML
+
+Provided functions for syntax creation:
+  
+#+ATTR_REVEAL: :frag roll-in
+- =makeValue= - booleans, numbers, strings
+- =makeIdent= - identifiers
+- =makeRegex= - regexps
+- =makePunc= - "Punctuators" (ie =+=, =-=, =/=, etc.)
+- =makeDelim= - ={}=, =[]=, =()=
+
+** Case Macros
+#+BEGIN_HTML
+<img src="images/lexical_context_1.png" />
+#+END_HTML
+
+** Case Macros
+#+BEGIN_HTML
+<img src="images/lexical_context_2.png" />
+#+END_HTML
+
+** Case Macros
+#+BEGIN_HTML
+<img src="images/lexical_context_3.png" />
+#+END_HTML
+
+** Case Macros
+#+BEGIN_HTML
+<img src="images/lexical_context_4.png" />
+#+END_HTML
+
+** Case Macros
+#+BEGIN_HTML
+<img src="images/lexical_context_5.png" />
+#+END_HTML
+** Case Macros
+Lexical Context
+
+#+BEGIN_EXAMPLE
+  var temp = "top level"
+  macro m {
+    case {$name () } => {
+  
+      var temp1 = makeIdent("temp",
+                            #{here});
+  
+      var temp2 = makeIdent("temp",
+                            #{$name})
+  
+      return [temp1,
+              makePunc("+", #{here}),
+              temp2];
+    }
+  }
+  
+  function foo() {
+    var temp = "inner";
+    m ()
+  }
+#+END_EXAMPLE
+** Case Macros
+Use =withSyntax= to mix templates and syntax creation
+
+#+BEGIN_EXAMPLE
+  macro m {
+    case {_ $x } => {
+
+      var y = makeValue(2, #{here});
+
+      return withSyntax($y = [y]) {
+        return #{$x + $y}
+      }
+    }
+  }
+  m 1
+#+END_EXAMPLE
+
+** Let Bound Macros
+Prevents the macro from being bound in the body
+
+#+BEGIN_EXAMPLE
+  let function = macro {
+    case {_
+      $name $params { $body ... }
+    } => {
+      return #{
+        function $name $params {
+          console.log("called...");
+          $body ...
+        }
+      }
+    }
+  } 
+  
+  function foo () {
+    return 2+2;
+  }
+#+END_EXAMPLE
+
+Infinite loop if we use =macro function { ... }=
+
+* Putting it all together
+#+BEGIN_HTML
+<br />
+#+END_HTML
+Let's make =if= anaphoric:
+
+#+BEGIN_SRC javascript
+  long.obj.path = [1, 2, 3];
+  if (long.obj.path) {
+      console.log(it);
+  }
+  // logs: [1, 2, 3]
+#+END_SRC
+
+This is unhygienic!
+(but kinda cool...)
+
+** Anaphoric if
+#+BEGIN_EXAMPLE
+  let if = macro {
+    case {
+      $if ($cond ...) {$body ...}
+    } => {
+  
+      var it = makeIdent("it", #{$if})
+  
+      return withSyntax($it = [it]) {
+        return #{ 
+          var $it = $cond ...
+          if ($it) {
+            $body ...
+          }
+        }
+      }
+    }
+  }
+  var long = {obj: {path: [1, 2, 3]}}
+  if (long.obj.path) {
+    console.log(it)
+  }
+#+END_EXAMPLE
+
+* Future Work
+- Sourcemaps
+- Improve error messages
+- Prove read is correct
+- Integration with modules
+
+** Get it
+http://sweetjs.org/
+
+https://github.com/mozilla/sweet.js
+
+#+BEGIN_SRC bash
+> npm install -g sweet.js
+#+END_SRC
