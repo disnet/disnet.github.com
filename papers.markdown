@@ -2,6 +2,10 @@
 layout: default
 ---
 
+## 2014
+
+* [Sweeten Your JavaScript: Hygienic Macros for ES5](/papers/sweeten-your-javascript.html)
+
 ## 2011
 
 * [Types for Precise Thread Interference](/papers/types-for-precise-thread-interference.html) (Tech Report)
