@@ -5,6 +5,7 @@ layout: default
 ## 2014
 
 * [Sweeten Your JavaScript: Hygienic Macros for ES5](/papers/sweeten-your-javascript.html)
+* [Dynamic Detection of Object Capability Violations Through Model Checking](/papers/dynamic-detection-of-ocap.html)
 
 ## 2011
 
