@@ -1,3 +1,2 @@
 permalink: /blog/:year/:month/:day/:title
-destination: /Library/WebServer/Documents
 pygments: true

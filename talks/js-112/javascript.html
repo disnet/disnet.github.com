@@ -286,8 +286,7 @@
                         </script>
                     </section>
 
-
-                    <section data-markdown>
+<!--                     <section data-markdown>
                         <script type="text/template">
                         ## Functions - Scoping
 
@@ -306,8 +305,27 @@
                             test();
                         </script>
                     </section>
+ -->
 
                     <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
+
+                            function printVariable() {
+                              console.log("in printVariable: " + variable);
+                            }
+
+                            function test() {
+                              variable = "test";
+                              console.log("in test:" + variable);
+                              printVariable();
+                            }
+
+                            test();
+                        </script>
+                    </section>
+
+<!--                     <section data-markdown>
                         <script type="text/template">
                         ## Functions - Scoping
 
@@ -326,7 +344,26 @@
                             test();
                         </script>
                     </section>
+ -->                    
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Functions - Scoping
 
+
+                            function printVariable() {
+                              console.log("in printVariable: " + variable);
+                            }
+
+                            function test() {
+                              var variable = "test";
+                              console.log("in test:" + variable);
+                              printVariable();
+                            }
+
+                            test();
+                        </script>
+                    </section>
+<!-- 
                     <section data-markdown>
                         <script type="text/template">
                         ## Functions - Scoping
@@ -343,7 +380,7 @@
                             parentFunction();
                         </script>
                     </section>
-
+ -->
                     <section data-markdown>
                         <script type="text/template">
                         ## Functions - Scoping
@@ -861,7 +898,7 @@
  -->
                 </section>
 
-                <section>
+<!--                 <section>
                     <section data-markdown>
                         <script type="text/template">
                         ### Modules
@@ -891,7 +928,7 @@
                         </script>
                     </section>
                 </section>
-
+ -->
 <!--                 <section>
                     <section data-markdown>
                         <script type="text/template">
@@ -1169,6 +1206,8 @@
                         * [Bananabread](https://developer.cdn.mozilla.net/media/uploads/demos/a/z/azakai/3baf4ad7e600cbda06ec46efec5ec3b8/bananabread_1348775105_demo_package/index.html)
                         * [emscripten](https://github.com/kripken/emscripten/wiki)
                         * [CoffeeScript](http://coffeescript.org/)
+                        * [Dart](http://www.dartlang.org/)
+                        * [TypeScript](http://www.typescriptlang.org/)
                         * [altJS](http://altjs.org/)
                         * [sweet.js](http://sweetjs.org/)
                         * [jQuery](http://jquery.com/)

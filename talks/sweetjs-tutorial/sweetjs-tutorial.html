@@ -35,15 +35,15 @@ Syntax for defining a class in JS:
 
 <div class="org-src-container">
 
-<pre class="src src-javascript"><span style="color: #728a05;">function</span> <span style="color: #2075c7;">Person</span>(<span style="color: #2075c7;">name</span>) {
-    <span style="color: #259185;">this</span>.name = name;
+<pre class="src src-javascript"><span style="color: #F0DFAF; font-weight: bold;">function</span> <span style="color: #93E0E3;">Person</span>(<span style="color: #DFAF8F;">name</span>) {
+    <span style="color: #BFEBBF;">this</span>.name = name;
 }
-Person.<span style="color: #259185;">prototype</span>.say = <span style="color: #728a05;">function</span>(<span style="color: #2075c7;">msg</span>) {
-    console.log(<span style="color: #259185;">this</span>.name + <span style="color: #259185;">" says: "</span> + msg);
+Person.<span style="color: #BFEBBF;">prototype</span>.say = <span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">msg</span>) {
+    console.log(<span style="color: #BFEBBF;">this</span>.name + <span style="color: #CC9393;">" says: "</span> + msg);
 } 
 
-<span style="color: #728a05;">var</span> <span style="color: #2075c7;">tim</span> = <span style="color: #728a05;">new</span> <span style="color: #a57705;">Person</span>(<span style="color: #259185;">"Tim"</span>);
-tim.say(<span style="color: #259185;">"I love JavaScript!"</span>);
+<span style="color: #F0DFAF; font-weight: bold;">var</span> <span style="color: #DFAF8F;">tim</span> = <span style="color: #F0DFAF; font-weight: bold;">new</span> <span style="color: #7CB8BB;">Person</span>(<span style="color: #CC9393;">"Tim"</span>);
+tim.say(<span style="color: #CC9393;">"I love JavaScript!"</span>);
 </pre>
 </div>
 
@@ -58,18 +58,18 @@ WANT!
 </p>
 <div class="org-src-container">
 
-<pre class="src src-javascript"><span style="color: #728a05;">class</span> Person {
+<pre class="src src-javascript"><span style="color: #F0DFAF; font-weight: bold;">class</span> Person {
     constructor(name) {
-        <span style="color: #259185;">this</span>.name = name;
+        <span style="color: #BFEBBF;">this</span>.name = name;
     }
 
     say(msg) {
-        console.log(<span style="color: #259185;">this</span>.name + <span style="color: #259185;">" says: "</span> + msg);
+        console.log(<span style="color: #BFEBBF;">this</span>.name + <span style="color: #CC9393;">" says: "</span> + msg);
     }
 }
 
-<span style="color: #728a05;">var</span> <span style="color: #2075c7;">tim</span> = <span style="color: #728a05;">new</span> <span style="color: #a57705;">Person</span>(<span style="color: #259185;">"Tim"</span>);
-tim.say(<span style="color: #259185;">"I love JavaScript!"</span>);
+<span style="color: #F0DFAF; font-weight: bold;">var</span> <span style="color: #DFAF8F;">tim</span> = <span style="color: #F0DFAF; font-weight: bold;">new</span> <span style="color: #7CB8BB;">Person</span>(<span style="color: #CC9393;">"Tim"</span>);
+tim.say(<span style="color: #CC9393;">"I love JavaScript!"</span>);
 </pre>
 </div>
 
@@ -142,13 +142,13 @@ C/C++ macros:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #bd3612;">#define</span> <span style="color: #2075c7;">PI</span> 3.14159
+<pre class="src src-c"><span style="color: #94BFF3; font-weight: bold;">#define</span> <span style="color: #DFAF8F;">PI</span> 3.14159
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #bd3612;">#define</span> <span style="color: #2075c7;">swap</span>(<span style="color: #2075c7;">x</span>,<span style="color: #2075c7;">y</span>) {<span style="color: #a57705;">int</span> <span style="color: #2075c7;">tmp</span>=(x); \
+<pre class="src src-c"><span style="color: #94BFF3; font-weight: bold;">#define</span> <span style="color: #93E0E3;">swap</span>(<span style="color: #DFAF8F;">x</span>,<span style="color: #DFAF8F;">y</span>) {<span style="color: #7CB8BB;">int</span> <span style="color: #DFAF8F;">tmp</span>=(x); \
     (x) = (y); \
     (y) = tmp;}
 </pre>
@@ -160,7 +160,7 @@ Scheme macros:
 <div class="org-src-container">
 
 <pre class="src src-scheme"><span style="color: #7f7f7f;">(</span>define-syntax-rule <span style="color: #7f7f7f;">(</span>swap x y<span style="color: #7f7f7f;">)</span>
-  <span style="color: #7f7f7f;">(</span><span style="color: #728a05;">let</span> <span style="color: #7f7f7f;">(</span>[tmp x]<span style="color: #7f7f7f;">)</span>
+  <span style="color: #7f7f7f;">(</span><span style="color: #F0DFAF; font-weight: bold;">let</span> <span style="color: #7f7f7f;">(</span>[tmp x]<span style="color: #7f7f7f;">)</span>
     <span style="color: #7f7f7f;">(</span>set! x y<span style="color: #7f7f7f;">)</span>
     <span style="color: #7f7f7f;">(</span>set! y tmp<span style="color: #7f7f7f;">)))</span>
 </pre>
@@ -228,13 +228,13 @@ Ellipses <code>...</code> are used to repeat syntax
 macro def {
   rule { 
 
-    $name ( $params (,) ... ) 
+    $name ( $params ... ) 
           { $body ... } 
 
   } =&gt; {
 
-    function $name($params (,) ...)
-                  { $body ... }
+    function $name ( $params ... )
+                   { $body ... }
 
   }
 }
@@ -542,7 +542,7 @@ Slightly different form from rule macros:
 <div class="org-src-container">
 
 <pre class="src src-javascript">macro &lt;name&gt; {
-    <span style="color: #728a05;">case</span> { &lt;pattern&gt; } =&gt; { &lt;body&gt; }
+    <span style="color: #F0DFAF; font-weight: bold;">case</span> { &lt;pattern&gt; } =&gt; { &lt;body&gt; }
 }
 </pre>
 </div>
@@ -732,11 +732,11 @@ Let's make <code>if</code> anaphoric:
 
 <div class="org-src-container">
 
-<pre class="src src-javascript"><span style="color: #a57705;">long</span>.obj.path = [1, 2, 3];
-<span style="color: #728a05;">if</span> (<span style="color: #a57705;">long</span>.obj.path) {
+<pre class="src src-javascript"><span style="color: #7CB8BB;">long</span>.obj.path = [1, 2, 3];
+<span style="color: #F0DFAF; font-weight: bold;">if</span> (<span style="color: #7CB8BB;">long</span>.obj.path) {
     console.log(it);
 }
-<span style="color: #465a61; font-style: italic;">// </span><span style="color: #465a61; font-style: italic;">logs: [1, 2, 3]</span>
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">logs: [1, 2, 3]</span>
 </pre>
 </div>
 
