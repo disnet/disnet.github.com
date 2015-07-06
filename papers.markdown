@@ -2,6 +2,10 @@
 layout: default
 ---
 
+## 2015
+
+* [Game Semantics for Type Soundness](/papers/game-semantics-for-type-soundness.html)
+
 ## 2014
 
 * [Sweeten Your JavaScript: Hygienic Macros for ES5](/papers/sweeten-your-javascript.html)
