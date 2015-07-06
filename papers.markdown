@@ -5,6 +5,7 @@ layout: default
 ## 2015
 
 * [Game Semantics for Type Soundness](/papers/game-semantics-for-type-soundness.html)
+* [Contracts for Async Patterns in JavaScript](/papers/contracts-for-async-patterns-in-javascript.html)
 
 ## 2014
 
