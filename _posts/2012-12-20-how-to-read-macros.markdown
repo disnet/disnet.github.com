@@ -15,56 +15,62 @@ The traditional way you build a compiler front end is to first write a lexer and
 
 For example,
 
-    if (foo > bar) {
-        alert("w00t!");
-    }
+```js
+if (foo > bar) {
+    alert("w00t!");
+}
+```
 
 gets lexed into something like:
 
-    ["if", "(", "foo", ">", "bar", ")", "{" ...]
+```js
+["if", "(", "foo", ">", "bar", ")", "{" ...]
+```
 
 The lexer is basically responsible for throwing away unnecessary whitespace and grouping identifiers, strings, and numbers into discrete chunks (ie tokens). The array of tokens is then parsed into an AST that might look something like this:
 
-    // output of esprima
-    {
-        "type": "Program",
-        "body": [
-            {
-                "type": "IfStatement",
-                "test": {
-                    "type": "BinaryExpression",
-                    "operator": ">",
-                    "left": {
-                        "type": "Identifier",
-                        "name": "foo"
-                    },
-                    "right": {
-                        "type": "Identifier",
-                        "name": "bar"
-                    }
+```js
+// output of esprima
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "IfStatement",
+            "test": {
+                "type": "BinaryExpression",
+                "operator": ">",
+                "left": {
+                    "type": "Identifier",
+                    "name": "foo"
                 },
-                "consequent": {
-                    "type": "BlockStatement",
-                    "body": [{
-                            "type": "ExpressionStatement",
-                            "expression": {
-                                "type": "CallExpression",
-                                "callee": {
-                                    "type": "Identifier",
-                                    "name": "alert"
-                                },
-                                "arguments": [{
-                                        "type": "Literal",
-                                        "value": "w00t!",
-                                        "raw": "\"w00t!\""
-                                    }]
-                            }
-                        }]
-                },
-                "alternate": null
-            }
-        ]
-    }
+                "right": {
+                    "type": "Identifier",
+                    "name": "bar"
+                }
+            },
+            "consequent": {
+                "type": "BlockStatement",
+                "body": [{
+                        "type": "ExpressionStatement",
+                        "expression": {
+                            "type": "CallExpression",
+                            "callee": {
+                                "type": "Identifier",
+                                "name": "alert"
+                            },
+                            "arguments": [{
+                                    "type": "Literal",
+                                    "value": "w00t!",
+                                    "raw": "\"w00t!\""
+                                }]
+                        }
+                    }]
+            },
+            "alternate": null
+        }
+    ]
+}
+```
 
 The AST gives you the structure necessary to do code optimization/generation etc.
 
@@ -75,20 +81,24 @@ Well, by the time we get to an AST it's too late since parsers only understand a
 
 Tokens are fine for cpp `#define` style macros but we want moar power! And, as it turns out, just normal tokens aren't going to cut it for us. Consider this simple macro that provides a concise way to define functions:
 
-    macro def {
-        case $name $params $body => {
-            function $name $params $body
-        }
+```js
+macro def {
+    case $name $params $body => {
+        function $name $params $body
     }
-    def add(a, b) {
-        return a + b;
-    }
+}
+def add(a, b) {
+    return a + b;
+}
+```
 
 which should be expanded into:
 
-    function add(a, b) {
-        return a + b;
-    }
+```js
+function add(a, b) {
+    return a + b;
+}
+```
 
 Critically, note that the macro needs to match `$params` with `(a, b)` and `$body` with `{ return a + b; }`. However, we don't have enough structure to do this with just the token array `["def", "add", "(", "a", ",", "b", ...]`: we need to match the delimiters (`()`, `{}`, and `[]`) first!
 
@@ -98,24 +108,28 @@ This is one of the reasons why macros are big in the lisp family of languages (s
 
 `read` is the crucial function that gives a little bit more structure to the array of tokens by matching up all those delimiters. Now instead of just a flat array of tokens we are going to get a *read tree:*
 
-    ["def", "add", {
-        type: "()",
-        innerTokens: ["a", ",", "b"]
-        }, {
-        type: "{}",
-        innerTokens: ["return", "a", "+", "b"]
-    }]
+```js
+["def", "add", {
+    type: "()",
+    innerTokens: ["a", ",", "b"]
+    }, {
+    type: "{}",
+    innerTokens: ["return", "a", "+", "b"]
+}]
+```
 
 Note this doesn't have all the structure of a full AST, it just knows about tokens and delimiters not expressions and statements. So now our `def` macro pattern variables will match up like so:
 
-    $params -> { 
-        type: "()", 
-        innerTokens: ["a", ",", "b"]
-    } 
-    $body -> { 
-        type: "{}", 
-        innerTokens: ["return", "a", "+", "b"]
-    }
+```js
+$params -> {
+    type: "()",
+    innerTokens: ["a", ",", "b"]
+}
+$body -> {
+    type: "{}",
+    innerTokens: ["return", "a", "+", "b"]
+}
+```
 
 Great! Now our pipeline looks something like:
 
@@ -125,26 +139,30 @@ Great! Now our pipeline looks something like:
 
 Ok, so all well and good but then why haven't we seen people implement `read` and build a macro system for JavaScript before now?
 
-It turns out that there's this really annoying token (for potential macro implementers) in JavaScript: `/`. 
+It turns out that there's this really annoying token (for potential macro implementers) in JavaScript: `/`.
 
 Here's the problem, depending on context `/` can mean two different things: the divide operator or the beginning of a regular expression literal.
 
-    10 / 2              // 5
-    /foo/.test("foo")   // true
+```js
+10 / 2              // 5
+/foo/.test("foo")   // true
+```
 
 (Well technically I guess `/` can also mean the start of a comment but this is always easy to figure out (since `//` **always** means line comment))
 
 So how do we disambiguate between divide and regex? It turns out that the way a normal parser (like [esprima][esprima] for example) does it is by running the lexer and parser together and resolving the ambiguity via the current **parsing** context. In other words, as the parser is working through each production, it calls out to the lexer with a flag saying what context it is in. Depending on that context the lexer will either lex `/` as a divide token or as a regular expression literal.
 
-But, we can't use the parsing context in `read` because we don't have any parsing context yet! 
+But, we can't use the parsing context in `read` because we don't have any parsing context yet!
 
 So, we somehow need to separate the lexer/reader from the parser.
 
 Now you might think we could get away with just leaving `/` as an ambiguous token (say a `divOrRegex` token for example) to be handled by the parser once all the macros have been expanded away but consider this code fragment we might want to `read`:
 
-    ... { /foo}bar/ ...
-    // as a token array this would be
-    // [... "{", "/", "foo", "}", "bar", "/", ...]
+```js
+... { /foo}bar/ ...
+// as a token array this would be
+// [... "{", "/", "foo", "}", "bar", "/", ...]
+```
 
 Remember that the entire point of `read` is to do delimiter matching, so should we match the `}` with the opening `{` or as part of a regular expression literal (remember `/}/` is a valid regex that matches a single `}`)? It completely depends on our interpretation of `/`!
 
@@ -159,7 +177,7 @@ A snippet of this algorithm goes something like:
     if tok is /
         if tok-1 is )
             look back to matching (
-            if identifier before ( in "if" "while" 
+            if identifier before ( in "if" "while"
                                       "for" "with"
                 tok is start of regex literal
             else
@@ -168,7 +186,9 @@ A snippet of this algorithm goes something like:
 
 For example, if we have:
 
-    if (foo + 24 > bar) /baz/.test("foo")
+```js
+if (foo + 24 > bar) /baz/.test("foo")
+```
 
 When we see the `/` we note that the previous token was `)` so we find its matching `(` and note that the token before that was `if` so `/` must be the beginning of a regular expression.
 
